@@ -38,31 +38,25 @@ export default function HomePage() {
         </div>
       </header>
 
-      <main id="top">
-        <section className="hero">
-          <Frame
-            tone="linear-gradient(145deg, #e7dfd3 0%, #9d9487 38%, #c9bfb2 70%, #efe8dc 100%)"
-            label="wizualizacja · salon"
-          />
-          <div className="hero-copy">
-            <p className="kicker">Warszawa · nr 01</p>
-            <h1>
-              Wnętrza,
-              <br />
-              <em>które zostają.</em>
-            </h1>
-            <p className="lead">
-              Magazyn jednego studia: mieszkania i domy projektowane od światła,
-              nie od katalogu. Marta Lewandowska — od konsultacji do odbioru.
-            </p>
-            <div className="hero-actions">
-              <a className="btn" href="#kontakt">
-                Umów konsultację
-              </a>
-              <a className="btn ghost" href="#realizacje">
-                Czytaj realizacje
-              </a>
-            </div>
+      <main>
+        <section className="hero wrap" id="top">
+          <p className="kicker">Warszawa · nr 01</p>
+          <h1>
+            Wnętrza,
+            <br />
+            <em>które zostają.</em>
+          </h1>
+          <p className="lead">
+            Magazyn jednego studia: mieszkania i domy projektowane od światła,
+            nie od katalogu. Marta Lewandowska — od konsultacji do odbioru.
+          </p>
+          <div className="hero-actions">
+            <a className="btn" href="#kontakt">
+              Umów konsultację
+            </a>
+            <a className="btn ghost" href="#realizacje">
+              Czytaj realizacje
+            </a>
           </div>
         </section>
 

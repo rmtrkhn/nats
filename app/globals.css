@@ -117,9 +117,13 @@ h2 {
 }
 
 .hero {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   min-height: calc(100vh - 64px);
+  padding: 72px 0;
 }
 
 .frame {
@@ -148,21 +152,19 @@ h2 {
   color: rgba(255,255,255,0.86);
 }
 
-.hero-copy {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 48px 40px 56px;
-}
-
 .lead {
-  margin: 22px 0 28px;
+  margin: 22px auto 28px;
   max-width: 38ch;
   color: var(--muted);
   font-size: 16px;
 }
 
-.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
 .issue, .band, .contact {
   scroll-margin-top: 72px;
@@ -306,7 +308,7 @@ input, textarea {
 
 @media (max-width: 900px) {
   .nav-links { display: none; }
-  .hero, .spread, .spread.reverse, .about, .contact, .reviews, .mosaic {
+  .spread, .spread.reverse, .about, .contact, .reviews, .mosaic {
     grid-template-columns: 1fr;
     grid-template-rows: none;
   }
@@ -316,6 +318,6 @@ input, textarea {
     grid-row: auto;
     min-height: 220px;
   }
-  .hero .frame, .spread .frame, .about .frame { min-height: 360px; }
-  .hero-copy { padding: 36px 0 48px; }
+  .spread .frame, .about .frame { min-height: 360px; }
+  .hero { min-height: auto; padding: 64px 0 48px; }
 }
