@@ -1,0 +1,25 @@
+{
+  "reviews": [
+    {
+      "id": "r1",
+      "author": "Katarzyna M.",
+      "project": "Mieszkanie, Mokotów",
+      "quote": "Marta prowadziła nas spokojnie przez cały proces. Wnętrze jest jasne, funkcjonalne i wreszcie wygląda jak my.",
+      "published": true
+    },
+    {
+      "id": "r2",
+      "author": "Paweł i Ola",
+      "project": "Dom, Wilanów",
+      "quote": "Wizualizacje były bardzo bliskie realizacji. Zero chaosu, jasne decyzje i terminy, których dało się dotrzymać.",
+      "published": true
+    },
+    {
+      "id": "r3",
+      "author": "Anna B.",
+      "project": "Apartament, Śródmieście",
+      "quote": "Czuć, że projekt wychodzi od życia, a nie od trendu. Szczególnie doceniam pracę ze światłem i materiałami.",
+      "published": true
+    }
+  ]
+}
