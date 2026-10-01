@@ -44,7 +44,7 @@ button, input, textarea { font: inherit; }
   align-items: center;
   justify-content: space-between;
   min-height: 64px;
-  gap: 20px;
+  padding: 0 var(--gutter) 0 calc((100vw - var(--wrap)) / 2);
 }
 
 .brand {
@@ -52,14 +52,11 @@ button, input, textarea { font: inherit; }
   font-style: italic;
   font-size: 22px;
   font-weight: 500;
+  line-height: 42px;
 }
 
-.nav-links {
-  display: flex;
-  gap: 26px;
-  font-size: 13px;
-  color: var(--muted);
-  letter-spacing: 0.04em;
+.nav-inner .btn {
+  align-self: center;
 }
 
 .btn {
@@ -119,17 +116,24 @@ h2 {
 }
 
 .hero {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  gap: 40px;
-  margin: 0 calc(3 * var(--gutter)) 56px var(--gutter);
+  display: grid;
+  grid-template-columns: 50vw minmax(0, 1fr);
+  align-items: end;
+  margin: 0 0 56px;
   min-height: auto;
 }
 
-.hero > .frame {
-  /* середина кадра = центр логотипа; левый край остаётся на --gutter */
-  width: calc((100vw - var(--wrap)) + 91px - 2 * var(--gutter));
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  width: 50vw;
+}
+
+.hero-visual .frame {
+  width: min(
+    calc(50vw - 2 * var(--gutter)),
+    calc((100vw - var(--wrap)) + 91px - 2 * var(--gutter))
+  );
   max-width: 100%;
   height: 91vh;
   min-height: 490px;
@@ -165,9 +169,8 @@ h2 {
 .hero-copy {
   display: flex;
   flex-direction: column;
-  padding: 0;
-  max-width: 36rem;
-  flex: 1;
+  padding: 0 var(--gutter) 0 0;
+  max-width: none;
   min-width: 0;
 }
 
@@ -319,7 +322,9 @@ input, textarea {
 }
 
 @media (max-width: 900px) {
-  .nav-links { display: none; }
+  .nav-inner {
+    padding: 0 16px 0 calc((100vw - var(--wrap)) / 2);
+  }
   .spread, .spread.reverse, .about, .contact, .reviews, .mosaic {
     grid-template-columns: 1fr;
     grid-template-rows: none;
@@ -331,15 +336,18 @@ input, textarea {
     min-height: 220px;
   }
   .hero {
-    margin: 0 calc(3 * 16px) 40px 16px;
-    gap: 24px;
+    grid-template-columns: 1fr;
+    margin: 0 0 40px;
   }
-  .hero > .frame {
+  .hero-visual {
     width: 100%;
+  }
+  .hero-visual .frame {
+    width: calc(100% - 32px);
     height: 73.5vh;
     min-height: 385px;
     max-height: 735px;
   }
+  .hero-copy { padding: 24px 16px 0; }
   .spread .frame, .about .frame { min-height: 360px; }
-  .hero-copy { padding: 0; }
 }

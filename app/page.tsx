@@ -24,14 +24,10 @@ export default function HomePage() {
   return (
     <>
       <header className="nav">
-        <div className="wrap nav-inner">
+        <div className="nav-inner">
           <a className="brand" href="#top">
             Atelier Lew
           </a>
-          <nav className="nav-links" aria-label="Główne">
-            <a href="#realizacje">Realizacje</a>
-            <a href="#kontakt">Kontakt</a>
-          </nav>
           <a className="btn" href="#kontakt">
             Umów konsultację
           </a>
@@ -40,10 +36,12 @@ export default function HomePage() {
 
       <main id="top">
         <section className="hero">
-          <Frame
-            tone="linear-gradient(145deg, #e7dfd3 0%, #9d9487 38%, #c9bfb2 70%, #efe8dc 100%)"
-            label="wizualizacja · salon"
-          />
+          <div className="hero-visual">
+            <Frame
+              tone="linear-gradient(145deg, #e7dfd3 0%, #9d9487 38%, #c9bfb2 70%, #efe8dc 100%)"
+              label="wizualizacja · salon"
+            />
+          </div>
           <div className="hero-copy">
             <p className="kicker">Warszawa · nr 01</p>
             <h1>
