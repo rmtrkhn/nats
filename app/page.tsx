@@ -55,14 +55,6 @@ export default function HomePage() {
               Magazyn jednego studia: mieszkania i domy projektowane od światła,
               nie od katalogu. Marta Lewandowska — od konsultacji do odbioru.
             </p>
-            <div className="hero-actions">
-              <a className="btn" href="#kontakt">
-                Umów konsultację
-              </a>
-              <a className="btn ghost" href="#realizacje">
-                Czytaj realizacje
-              </a>
-            </div>
           </div>
         </section>
 
