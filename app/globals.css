@@ -9,6 +9,11 @@
   --paper: #ebe6de;
   --gutter: 40px;
   --wrap: min(1180px, calc(100vw - 36px));
+  --hero-frame: min(
+    calc(50vw - 2 * var(--gutter)),
+    calc((100vw - var(--wrap)) + 91px - 2 * var(--gutter))
+  );
+  --hero-visual-pad: calc((50vw - var(--hero-frame)) / 2);
 }
 
 * { box-sizing: border-box; }
@@ -118,7 +123,7 @@ h2 {
 .hero {
   display: grid;
   grid-template-columns: 50vw minmax(0, 1fr);
-  align-items: end;
+  align-items: center;
   margin: 0 0 56px;
   min-height: auto;
 }
@@ -130,10 +135,7 @@ h2 {
 }
 
 .hero-visual .frame {
-  width: min(
-    calc(50vw - 2 * var(--gutter)),
-    calc((100vw - var(--wrap)) + 91px - 2 * var(--gutter))
-  );
+  width: var(--hero-frame);
   max-width: 100%;
   height: 91vh;
   min-height: 490px;
@@ -144,6 +146,16 @@ h2 {
   position: relative;
   min-height: 280px;
   overflow: hidden;
+  background: var(--soft);
+}
+
+.frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .frame::after {
@@ -169,6 +181,7 @@ h2 {
 .hero-copy {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   padding: 0 var(--gutter) 0 0;
   max-width: none;
   min-width: 0;
@@ -186,21 +199,62 @@ h2 {
 }
 
 .issue {
-  padding: 72px 0;
+  padding: 0 0 72px;
+}
+
+.issue-head {
+  display: grid;
+  grid-template-columns: 50vw minmax(0, 1fr);
+  margin-bottom: 56px;
+}
+
+.issue-head .issue-head-copy {
+  grid-column: 2;
+  padding-right: var(--gutter);
 }
 
 .spread {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 28px 48px;
+  grid-template-columns: 50vw minmax(0, 1fr);
   align-items: center;
   margin-bottom: 88px;
 }
 
-.spread.reverse { grid-template-columns: 0.95fr 1.05fr; }
-.spread.reverse .copy { order: -1; }
+.spread-visual {
+  display: flex;
+  justify-content: center;
+  width: 50vw;
+}
 
-.spread .frame { min-height: 520px; }
+.spread-visual .frame {
+  width: calc(50vw - 2 * var(--gutter));
+  max-width: 100%;
+  min-height: 520px;
+  height: 70vh;
+  max-height: 760px;
+}
+
+.spread .copy {
+  width: min(42ch, 100%);
+  padding-right: var(--gutter);
+}
+
+.spread.reverse {
+  grid-template-columns: minmax(0, 1fr) 50vw;
+  align-items: center;
+}
+
+.spread.reverse .copy {
+  order: -1;
+  justify-self: end;
+  width: min(42ch, 100%);
+  padding-right: 0;
+  padding-left: var(--gutter);
+}
+
+.spread.reverse .spread-visual {
+  width: 50vw;
+}
 
 .copy p {
   color: var(--muted);
@@ -216,16 +270,31 @@ h2 {
 }
 
 .mosaic {
-  display: grid;
-  grid-template-columns: 1.3fr 0.7fr 0.9fr;
-  grid-template-rows: 240px 200px;
-  gap: 12px;
+  columns: 2;
+  column-gap: 16px;
+  margin: 0 var(--gutter);
 }
 
-.mosaic .a { grid-row: 1 / 3; }
-.mosaic .b { grid-column: 2; }
-.mosaic .c { grid-column: 3; grid-row: 1 / 3; }
-.mosaic .d { grid-column: 2; }
+.mosaic .frame {
+  break-inside: avoid;
+  min-height: 0;
+  height: auto;
+  margin: 0 0 16px;
+}
+
+.mosaic .frame:last-child {
+  margin-bottom: 0;
+}
+
+.mosaic .frame::after {
+  display: none;
+}
+
+.mosaic .frame img {
+  position: static;
+  height: auto;
+  object-fit: unset;
+}
 
 .band {
   background: var(--paper);
@@ -293,10 +362,16 @@ h2 {
 .facts dd { margin: 4px 0 0; }
 
 .contact {
+  padding: 80px var(--gutter) 40px;
+}
+
+.contact-inner {
+  width: min(1180px, 100%);
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 48px;
-  padding: 80px 0 40px;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px 64px;
+  align-items: start;
 }
 
 form { display: grid; gap: 12px; }
@@ -322,32 +397,141 @@ input, textarea {
 }
 
 @media (max-width: 900px) {
-  .nav-inner {
-    padding: 0 16px 0 calc((100vw - var(--wrap)) / 2);
+  :root {
+    --gutter: 16px;
   }
-  .spread, .spread.reverse, .about, .contact, .reviews, .mosaic {
+
+  h1 {
+    font-size: clamp(32px, 11vw, 44px);
+  }
+
+  h2 {
+    font-size: clamp(26px, 8vw, 36px);
+  }
+
+  .nav-inner {
+    padding: 0 var(--gutter);
+    min-height: 56px;
+  }
+
+  .brand {
+    font-size: 20px;
+    line-height: 36px;
+  }
+
+  .btn {
+    min-height: 40px;
+    padding: 0 14px;
+    font-size: 10px;
+  }
+
+  .spread,
+  .spread.reverse,
+  .about,
+  .reviews,
+  .issue-head {
     grid-template-columns: 1fr;
     grid-template-rows: none;
   }
-  .spread.reverse .copy { order: 0; }
-  .mosaic .a, .mosaic .b, .mosaic .c, .mosaic .d {
-    grid-column: auto;
-    grid-row: auto;
-    min-height: 220px;
+
+  .spread {
+    margin-bottom: 48px;
   }
+
+  .spread.reverse .copy {
+    order: 0;
+    justify-self: stretch;
+    width: auto;
+    padding: 16px var(--gutter) 0;
+  }
+
+  .issue-head {
+    margin-bottom: 28px;
+  }
+
+  .issue-head .issue-head-copy {
+    grid-column: 1;
+    padding: 0 var(--gutter);
+  }
+
+  .spread-visual {
+    width: 100%;
+  }
+
+  .spread-visual .frame {
+    width: calc(100% - 2 * var(--gutter));
+    height: 48vh;
+    min-height: 220px;
+    max-height: 360px;
+  }
+
+  .spread .copy {
+    width: auto;
+    padding: 16px var(--gutter) 0;
+  }
+
+  .mosaic {
+    columns: 2;
+    column-gap: 10px;
+    margin: 0 var(--gutter);
+  }
+
+  .mosaic .frame {
+    margin-bottom: 10px;
+  }
+
+  .contact {
+    padding: 48px var(--gutter) 32px;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
   .hero {
     grid-template-columns: 1fr;
-    margin: 0 0 40px;
+    margin: 0 0 32px;
   }
+
   .hero-visual {
     width: 100%;
   }
+
   .hero-visual .frame {
-    width: calc(100% - 32px);
-    height: 73.5vh;
-    min-height: 385px;
-    max-height: 735px;
+    width: calc(100% - 2 * var(--gutter));
+    height: 48vh;
+    min-height: 240px;
+    max-height: 380px;
   }
-  .hero-copy { padding: 24px 16px 0; }
-  .spread .frame, .about .frame { min-height: 360px; }
+
+  .hero-copy {
+    padding: 20px var(--gutter) 0;
+  }
+
+  .lead {
+    font-size: 15px;
+    margin-top: 14px;
+  }
+
+  .issue {
+    padding: 0 0 48px;
+  }
+
+  .spread .frame,
+  .about .frame {
+    min-height: 220px;
+  }
+
+  .site-foot {
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px 0 36px;
+  }
+
+  input,
+  textarea {
+    padding: 12px 0;
+    font-size: 16px;
+  }
 }

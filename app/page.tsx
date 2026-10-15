@@ -1,21 +1,18 @@
 import { mosaic, projects } from "../content/projects";
+import { asset } from "../lib/asset";
 
 function Frame({
-  tone,
+  src,
   label,
   className = "",
 }: {
-  tone: string;
+  src: string;
   label: string;
   className?: string;
 }) {
   return (
-    <div
-      className={`frame ${className}`}
-      style={{ background: tone }}
-      aria-label={`${label} — placeholder`}
-    >
-      <span>{label}</span>
+    <div className={`frame ${className}`} aria-label={label}>
+      <img src={src} alt={label} />
     </div>
   );
 }
@@ -38,8 +35,8 @@ export default function HomePage() {
         <section className="hero">
           <div className="hero-visual">
             <Frame
-              tone="linear-gradient(145deg, #e7dfd3 0%, #9d9487 38%, #c9bfb2 70%, #efe8dc 100%)"
-              label="wizualizacja · salon"
+              src={asset("/visuals/dining-sofa.jpg")}
+              label="Salon i jadalnia — wizualizacja NATS.architects"
             />
           </div>
           <div className="hero-copy">
@@ -56,21 +53,27 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="issue wrap" id="realizacje">
-          <p className="kicker">Zeszyt realizacji</p>
-          <h2 style={{ marginBottom: 48 }}>Obraz i opis</h2>
+        <section className="issue" id="realizacje">
+          <div className="issue-head">
+            <div className="issue-head-copy">
+              <p className="kicker">Zeszyt realizacji</p>
+              <h2>Obraz i opis</h2>
+            </div>
+          </div>
 
           {projects.map((p) => (
             <article
               key={p.id}
-              className={`spread${p.layout === "right" ? " reverse" : ""}`}
+              className={p.layout === "right" ? "spread reverse" : "spread"}
             >
-              <Frame tone={p.tone} label={`${p.title} · placeholder`} />
+              <div className="spread-visual">
+                <Frame src={p.src} label={`${p.title} — wizualizacja`} />
+              </div>
               <div className="copy">
                 <p className="kicker">{p.meta}</p>
                 <h2>{p.title}</h2>
                 <p>{p.copy}</p>
-                <p className="caption">Kadr zastępczy · 3D / foto po realizacji</p>
+                <p className="caption">Wizualizacja 3D · NATS.architects</p>
                 <div className="hero-actions" style={{ marginTop: 24 }}>
                   <a className="btn" href="#kontakt">
                     Zapytaj o podobny układ
@@ -85,44 +88,46 @@ export default function HomePage() {
               <Frame
                 key={m.id}
                 className={["a", "b", "c", "d"][i]}
-                tone={`linear-gradient(165deg, ${m.tone}, #8f877c)`}
+                src={m.src}
                 label={`${m.title} · ${m.note}`}
               />
             ))}
           </div>
         </section>
 
-        <section className="wrap contact" id="kontakt">
-          <div>
-            <p className="kicker">Kolofon</p>
-            <h2>Zacznijmy od rozmowy.</h2>
-            <p style={{ color: "var(--muted)", maxWidth: "36ch" }}>
-              Metraż, dzielnica, termin. Odpowiedź w dwa dni robocze — bez
-              konta, bez logowania.
-            </p>
-            <p>
-              <a href="mailto:hello@atelierlew.pl">hello@atelierlew.pl</a>
-              <br />
-              <a href="tel:+48500100200">+48 500 100 200</a>
-            </p>
+        <section className="contact" id="kontakt">
+          <div className="contact-inner">
+            <div>
+              <p className="kicker">Kolofon</p>
+              <h2>Zacznijmy od rozmowy.</h2>
+              <p style={{ color: "var(--muted)", maxWidth: "36ch" }}>
+                Metraż, dzielnica, termin. Odpowiedź w dwa dni robocze — bez
+                konta, bez logowania.
+              </p>
+              <p>
+                <a href="mailto:hello@atelierlew.pl">hello@atelierlew.pl</a>
+                <br />
+                <a href="tel:+48500100200">+48 500 100 200</a>
+              </p>
+            </div>
+            <form action="#kontakt">
+              <label>
+                Imię
+                <input name="name" required autoComplete="name" />
+              </label>
+              <label>
+                E-mail
+                <input name="email" type="email" required autoComplete="email" />
+              </label>
+              <label>
+                O projekcie
+                <textarea name="message" rows={4} required />
+              </label>
+              <button className="btn" type="submit">
+                Wyślij zapytanie
+              </button>
+            </form>
           </div>
-          <form action="#kontakt">
-            <label>
-              Imię
-              <input name="name" required autoComplete="name" />
-            </label>
-            <label>
-              E-mail
-              <input name="email" type="email" required autoComplete="email" />
-            </label>
-            <label>
-              O projekcie
-              <textarea name="message" rows={4} required />
-            </label>
-            <button className="btn" type="submit">
-              Wyślij zapytanie
-            </button>
-          </form>
         </section>
       </main>
 
