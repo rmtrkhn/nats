@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const repo = "nats";
-const isProd = process.env.NODE_ENV === "production";
-const basePath = isProd ? `/${repo}` : "";
+/** GitHub Pages lives at /nats; local `next build` + `serve out` uses /. */
+const basePath = process.env.GITHUB_PAGES === "true" ? `/${repo}` : "";
 
 const nextConfig: NextConfig = {
   output: "export",
