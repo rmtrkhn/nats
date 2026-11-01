@@ -19,7 +19,6 @@ export function ProjectCarousel({
   copy,
   frames,
   reverse,
-  intro,
 }: {
   id: string;
   title: string;
@@ -27,7 +26,6 @@ export function ProjectCarousel({
   copy: string;
   frames: readonly Frame[];
   reverse?: boolean;
-  intro?: { kicker: string; heading: string };
 }) {
   const root = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
@@ -253,7 +251,7 @@ export function ProjectCarousel({
           <div className="carousel-track" ref={track}>
             {frames.map((item) => (
               <div key={item.src} className="carousel-slide">
-                <div className="frame" style={{ aspectRatio: `${item.width} / ${item.height}` }}>
+                <div className="frame">
                   <img
                     src={item.src}
                     srcSet={item.srcSet}
@@ -272,14 +270,8 @@ export function ProjectCarousel({
         </div>
       </div>
       <div className="copy">
-        {intro ? (
-          <>
-            <p className="kicker">{intro.kicker}</p>
-            <p className="issue-title">{intro.heading}</p>
-          </>
-        ) : null}
         <p className="kicker">{meta}</p>
-        <h2>{title}</h2>
+        <h3 className="project-title">{title}</h3>
         <p>{copy}</p>
         <div className="carousel-caption" aria-live="off">
           {frames.map((item, i) => (

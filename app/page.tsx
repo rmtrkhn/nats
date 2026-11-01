@@ -15,7 +15,7 @@ export default function HomePage() {
         <section className="hero">
           <div className="page hero-grid">
             <div className="hero-visual">
-              <div className="frame" style={{ aspectRatio: "4 / 5" }}>
+              <div className="frame" style={{ aspectRatio: "1050 / 1140" }}>
                 <img
                   src={hero.src}
                   srcSet={hero.srcSet}
@@ -39,14 +39,24 @@ export default function HomePage() {
                 <em>które zostają.</em>
               </h1>
               <p className="lead">
-                Dwa flagowe projekty. Od osi i światła do węzła i faktury.
+                Dziesięć realizacji. Od osi i światła do węzła i faktury.
               </p>
             </div>
           </div>
         </section>
 
         <section className="issue" id="realizacje">
-          {projects.map((project, index) => (
+          <header className="page issue-head">
+            <div>
+              <p className="kicker">Realizacje</p>
+              <h2>
+                Dziesięć wnętrz,
+                <br />
+                <em>pełna głębokość</em>
+              </h2>
+            </div>
+          </header>
+          {projects.map((project) => (
             <ProjectCarousel
               key={project.id}
               id={project.id}
@@ -55,11 +65,6 @@ export default function HomePage() {
               copy={project.copy}
               frames={project.frames}
               reverse={project.layout === "right"}
-              intro={
-                index === 0
-                  ? { kicker: "Realizacje", heading: "Dwa mieszkania, pełna głębokość" }
-                  : undefined
-              }
             />
           ))}
         </section>
