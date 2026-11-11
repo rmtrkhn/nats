@@ -2,12 +2,20 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import { asset } from "../../lib/asset";
+import { type Locale, getUi, localeHref, thanksRedirect } from "../../lib/i18n";
 
 type ProjectRef = { id: string; title: string };
 
 const ENDPOINT = "https://formsubmit.co/ajax/hello@atelierlew.pl";
 
-export function ContactForm({ projects }: { projects: readonly ProjectRef[] }) {
+export function ContactForm({
+  locale,
+  projects,
+}: {
+  locale: Locale;
+  projects: readonly ProjectRef[];
+}) {
+  const t = getUi(locale).form;
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -21,9 +29,10 @@ export function ContactForm({ projects }: { projects: readonly ProjectRef[] }) {
     const id = new URLSearchParams(window.location.search).get("projekt");
     const found = projects.find((item) => item.id === id);
     if (!found) return;
+    const form = getUi(locale).form;
     setProjectTitle(found.title);
-    setMessage((prev) => prev || `Chcę porozmawiać o projekcie ${found.title}.`);
-  }, [projects]);
+    setMessage((prev) => prev || form.prefilled(found.title));
+  }, [projects, locale]);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -42,9 +51,7 @@ export function ContactForm({ projects }: { projects: readonly ProjectRef[] }) {
           message,
           projekt: projectTitle,
           zgoda: "tak",
-          _subject: projectTitle
-            ? `NATS — zapytanie: ${projectTitle}`
-            : "NATS — zapytanie",
+          _subject: projectTitle ? t.subjectProject(projectTitle) : t.subject,
           _template: "table",
           _captcha: "false",
         }),
@@ -61,7 +68,7 @@ export function ContactForm({ projects }: { projects: readonly ProjectRef[] }) {
   if (status === "ok") {
     return (
       <p className="form-status" role="status">
-        Zapytanie przyjęte. Odpowiedź przyjdzie na podany adres.
+        {t.ok}
       </p>
     );
   }
@@ -77,17 +84,17 @@ export function ContactForm({ projects }: { projects: readonly ProjectRef[] }) {
       <input
         type="hidden"
         name="_subject"
-        value={projectTitle ? `NATS — zapytanie: ${projectTitle}` : "NATS — zapytanie"}
+        value={projectTitle ? t.subjectProject(projectTitle) : t.subject}
       />
-      <input type="hidden" name="_next" value="https://rmtrkhn.github.io/nats/dziekujemy/" />
+      <input type="hidden" name="_next" value={thanksRedirect(locale)} />
       {projectTitle ? (
         <p className="project-ref">
-          Wiadomość dotyczy projektu {projectTitle}.
+          {t.projectRef(projectTitle)}
           <input type="hidden" name="projekt" value={projectTitle} />
         </p>
       ) : null}
       <label htmlFor="name">
-        Imię <span className="req">*</span>
+        {t.name} <span className="req">*</span>
         <input
           id="name"
           name="name"
@@ -98,7 +105,7 @@ export function ContactForm({ projects }: { projects: readonly ProjectRef[] }) {
         />
       </label>
       <label htmlFor="email">
-        E-mail <span className="req">*</span>
+        {t.email} <span className="req">*</span>
         <input
           id="email"
           name="email"
@@ -110,7 +117,7 @@ export function ContactForm({ projects }: { projects: readonly ProjectRef[] }) {
         />
       </label>
       <label htmlFor="message">
-        O projekcie <span className="req">*</span>
+        {t.message} <span className="req">*</span>
         <textarea
           id="message"
           name="message"
@@ -120,7 +127,7 @@ export function ContactForm({ projects }: { projects: readonly ProjectRef[] }) {
           onChange={(event) => setMessage(event.target.value)}
         />
       </label>
-      <p className="form-note">Pola oznaczone * są wymagane.</p>
+      <p className="form-note">{t.requiredNote}</p>
       <div className="consent">
         <input
           id="consent"
@@ -133,20 +140,19 @@ export function ContactForm({ projects }: { projects: readonly ProjectRef[] }) {
         />
         <span>
           <label htmlFor="consent">
-            Zgadzam się na przetwarzanie imienia, adresu e-mail i treści wiadomości w celu
-            odpowiedzi na zapytanie.
+            {t.consent}
           </label>{" "}
-          <a href={asset("/polityka/")}>Polityka prywatności</a>
+          <a href={localeHref(locale, "polityka")}>{t.privacy}</a>
         </span>
       </div>
       {status === "error" ? (
         <p className="form-status" role="alert">
-          Nie udało się wysłać. Napisz bezpośrednio na{" "}
+          {t.error}{" "}
           <a href="mailto:hello@atelierlew.pl">hello@atelierlew.pl</a>.
         </p>
       ) : null}
       <button className="btn" type="submit" disabled={hydrated && (!consent || status === "sending")}>
-        {status === "sending" ? "Wysyłanie" : "Wyślij"}
+        {status === "sending" ? t.sending : t.send}
       </button>
     </form>
   );
