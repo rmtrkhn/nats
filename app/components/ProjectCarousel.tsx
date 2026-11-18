@@ -64,6 +64,15 @@ export function ProjectCarousel({
     let pointerId = -1;
     let lastIndex = 0;
     let snapTimer = 0;
+    let lastFrame = 0;
+    let mode: "rest" | "follow" | "glide" = "rest";
+    let glideFrom = 0;
+    let glideToPos = 0;
+    let glideStart = 0;
+    let glideMs = 0;
+    let sampleX = 0;
+    let sampleT = 0;
+    let velocity = 0;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const max = () => Math.max(0, (n - 1) * width);
@@ -84,17 +93,35 @@ export function ProjectCarousel({
       }
     };
 
-    const tick = () => {
+    const easeOut = (t: number) => 1 - (1 - t) ** 3;
+    const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
+    let glideEase = easeInOut;
+
+    const tick = (now: number) => {
       raf = 0;
+      const dt = lastFrame ? Math.min(34, now - lastFrame) : 16;
+      lastFrame = now;
+
       if (!dragging) {
-        if (reduce) current = target;
-        else current += (target - current) * 0.38;
-        if (Math.abs(target - current) < 0.4) current = target;
+        if (reduce || mode === "rest") current = target;
+        else if (mode === "glide") {
+          const t = Math.min(1, (now - glideStart) / glideMs);
+          current = glideFrom + (glideToPos - glideFrom) * glideEase(t);
+          if (t >= 1) {
+            current = glideToPos;
+            target = glideToPos;
+            mode = "rest";
+          }
+        } else {
+          current += (target - current) * (1 - Math.exp(-dt / 56));
+          if (Math.abs(target - current) < 0.35) current = target;
+        }
       }
+
       paint();
-      if (dragging || Math.abs(target - current) >= 0.35) {
-        raf = requestAnimationFrame(tick);
-      }
+      const moving = dragging || mode === "glide" || Math.abs(target - current) >= 0.35;
+      if (moving) raf = requestAnimationFrame(tick);
+      else lastFrame = 0;
     };
 
     const kick = () => {
@@ -103,12 +130,36 @@ export function ProjectCarousel({
 
     const clampTarget = (v: number) => Math.min(max(), Math.max(0, v));
 
+    const nearest = (v: number) => {
+      if (!width) return 0;
+      return Math.round(clampTarget(v) / width) * width;
+    };
+
+    const glide = (dest: number, flung = false) => {
+      dest = clampTarget(dest);
+      target = dest;
+      window.clearTimeout(snapTimer);
+      if (reduce || Math.abs(dest - current) < 0.5) {
+        current = dest;
+        mode = "rest";
+        paint();
+        return;
+      }
+      glideFrom = current;
+      glideToPos = dest;
+      glideStart = performance.now();
+      glideMs = Math.min(640, Math.max(220, Math.abs(dest - current) * 1.05));
+      glideEase = flung ? easeOut : easeInOut;
+      mode = "glide";
+      kick();
+    };
+
     const snapSoon = () => {
       window.clearTimeout(snapTimer);
       snapTimer = window.setTimeout(() => {
-        target = Math.round(target / width) * width;
-        kick();
-      }, 70);
+        if (dragging) return;
+        glide(nearest(target));
+      }, 180);
     };
 
     const onWheel = (e: WheelEvent) => {
@@ -116,13 +167,14 @@ export function ProjectCarousel({
       const dy = e.deltaY * (e.deltaMode === 1 ? 16 : 1);
       const delta = Math.abs(e.deltaX) > Math.abs(dy) ? e.deltaX : dy;
       if (!delta) return;
-      const next = target + delta;
+      const base = mode === "glide" ? current : target;
+      const next = base + delta;
       if (next < 0 && delta < 0) return;
       if (next > max() && delta > 0) return;
       e.preventDefault();
+      mode = "follow";
       target = clampTarget(next);
-      current = target;
-      paint();
+      kick();
       snapSoon();
     };
 
@@ -133,7 +185,12 @@ export function ProjectCarousel({
       pointerId = e.pointerId;
       dragOrigin = e.clientX;
       originY = e.clientY;
+      if (mode === "glide") mode = "follow";
       dragStart = current;
+      target = current;
+      sampleX = e.clientX;
+      sampleT = performance.now();
+      velocity = 0;
       window.clearTimeout(snapTimer);
     };
 
@@ -152,6 +209,11 @@ export function ProjectCarousel({
         viewport.setPointerCapture(e.pointerId);
         kick();
       }
+      const now = performance.now();
+      const elapsed = now - sampleT;
+      if (elapsed > 0) velocity = velocity * 0.65 + ((sampleX - e.clientX) / elapsed) * 0.35;
+      sampleX = e.clientX;
+      sampleT = now;
       current = clampTarget(dragStart - dx);
       target = current;
       kick();
@@ -171,13 +233,14 @@ export function ProjectCarousel({
         openAt.current(Math.max(0, Math.min(n - 1, i)));
         return;
       }
-      target = Math.round(current / width) * width;
-      kick();
+      const idle = performance.now() - sampleT;
+      const coast =
+        idle > 90 ? 0 : Math.max(-width * 0.85, Math.min(width * 0.85, velocity * 280));
+      glide(nearest(current + coast), Math.abs(coast) > 12);
     };
 
     const go = (i: number) => {
-      target = clampTarget(Math.max(0, Math.min(n - 1, i)) * width);
-      kick();
+      glide(Math.max(0, Math.min(n - 1, i)) * width);
     };
 
     const onKey = (e: KeyboardEvent) => {
@@ -199,7 +262,9 @@ export function ProjectCarousel({
       const i = width ? current / width : 0;
       width = viewport.clientWidth;
       current = i * width;
-      target = Math.round(i) * width;
+      target = nearest(i * width);
+      mode = "rest";
+      window.clearTimeout(snapTimer);
       paint();
     };
 
@@ -213,10 +278,12 @@ export function ProjectCarousel({
     viewport.addEventListener("pointermove", onMove);
     const onCancel = (e: PointerEvent) => {
       if (e.pointerId !== pointerId) return;
+      const wasDrag = dragging;
       armed = false;
       dragging = false;
       pointerId = -1;
       viewport.classList.remove("is-drag");
+      if (wasDrag) glide(nearest(current));
     };
 
     viewport.addEventListener("pointerup", onUp);
