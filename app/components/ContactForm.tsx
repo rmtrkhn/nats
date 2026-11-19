@@ -2,11 +2,12 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import { asset } from "../../lib/asset";
+import { studio } from "../../content/studio";
 import { type Locale, getUi, localeHref, thanksRedirect } from "../../lib/i18n";
 
 type ProjectRef = { id: string; title: string };
 
-const ENDPOINT = "https://formsubmit.co/ajax/hello@atelierlew.pl";
+const ENDPOINT = `https://formsubmit.co/ajax/${studio.email}`;
 
 export function ContactForm({
   locale,
@@ -76,7 +77,7 @@ export function ContactForm({
   return (
     <form
       method="post"
-      action="https://formsubmit.co/hello@atelierlew.pl"
+      action={`https://formsubmit.co/${studio.email}`}
       onSubmit={onSubmit}
     >
       <input type="hidden" name="_captcha" value="false" />
@@ -148,7 +149,7 @@ export function ContactForm({
       {status === "error" ? (
         <p className="form-status" role="alert">
           {t.error}{" "}
-          <a href="mailto:hello@atelierlew.pl">hello@atelierlew.pl</a>.
+          <a href={`mailto:${studio.email}`}>{studio.email}</a>.
         </p>
       ) : null}
       <button className="btn" type="submit" disabled={hydrated && (!consent || status === "sending")}>

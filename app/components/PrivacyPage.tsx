@@ -1,5 +1,6 @@
 import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
+import { studio } from "../../content/studio";
 import { type Locale, getUi, localeHref } from "../../lib/i18n";
 
 export function PrivacyPage({ locale }: { locale: Locale }) {
@@ -13,7 +14,7 @@ export function PrivacyPage({ locale }: { locale: Locale }) {
         <h1>{copy.title}</h1>
         <p>
           {copy.p1}{" "}
-          <a href="mailto:hello@atelierlew.pl">hello@atelierlew.pl</a>.
+          <a href={`mailto:${studio.email}`}>{studio.email}</a>.
         </p>
         <p>{copy.p2}</p>
         <p>{copy.p3}</p>

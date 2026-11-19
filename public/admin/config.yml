@@ -1,0 +1,105 @@
+backend:
+  name: github
+  repo: rmtrkhn/nats
+  branch: main
+  auth_methods:
+    - token
+
+site_url: https://rmtrkhn.github.io/nats
+display_url: https://rmtrkhn.github.io/nats
+media_folder: public/visuals
+public_folder: /visuals
+
+collections:
+  - name: projects
+    label: Реализации
+    files:
+      - name: projects
+        label: Секции
+        file: content/projects.json
+        format: json
+        fields:
+          - name: projects
+            label: Секции
+            label_singular: Секция
+            widget: list
+            summary: "{{title}}"
+            hint: Первая секция и её первое фото — обложка наверху. Порядок секций и фото меняется перетаскиванием.
+            fields:
+              - name: id
+                label: Идентификатор
+                widget: string
+                hint: Латиница без пробелов. Ссылка «спросить об этом проекте» ведёт на эту секцию.
+                pattern:
+                  - "^[a-z0-9-]+$"
+                  - Только строчные латинские буквы, цифры и дефис
+              - name: title
+                label: Название
+                widget: string
+              - name: meta
+                label: Строка над названием
+                widget: string
+                hint: Например «Warszawa · wysoki strop».
+              - name: copy
+                label: Текст
+                widget: text
+              - name: layout
+                label: Раскладка
+                widget: select
+                default: left
+                options:
+                  - { label: Фото слева, value: left }
+                  - { label: Фото справа, value: right }
+              - name: frames
+                label: Фото
+                label_singular: Фото
+                widget: list
+                summary: "{{label}}"
+                minimize_collapsed: true
+                fields:
+                  - name: image
+                    label: Файл
+                    widget: image
+                    choose_url: false
+                    hint: На сайте кадр обрезается до пропорции 1050×1140.
+                  - name: label
+                    label: Подпись
+                    widget: string
+                  - name: role
+                    label: Роль кадра
+                    widget: select
+                    default: idea
+                    options:
+                      - { label: Концепция, value: idea }
+                      - { label: Планировка, value: plan }
+                      - { label: Свет, value: light }
+                      - { label: Узел, value: node }
+                      - { label: Материал, value: material }
+
+  - name: studio
+    label: Studio
+    files:
+      - name: pl
+        label: Studio — польский
+        file: content/studio-pl.json
+        format: json
+        fields:
+          - { name: studioKicker, label: Надпись сверху, widget: string }
+          - { name: studioTitle, label: Заголовок, widget: string }
+          - { name: studioCopy, label: Текст, widget: text }
+          - { name: workLabel, label: "Факт 1 — подпись", widget: string }
+          - { name: workValue, label: "Факт 1 — значение", widget: string }
+          - { name: placeLabel, label: "Факт 2 — подпись", widget: string }
+          - { name: placeValue, label: "Факт 2 — значение", widget: string }
+      - name: en
+        label: Studio — английский
+        file: content/studio-en.json
+        format: json
+        fields:
+          - { name: studioKicker, label: Надпись сверху, widget: string }
+          - { name: studioTitle, label: Заголовок, widget: string }
+          - { name: studioCopy, label: Текст, widget: text }
+          - { name: workLabel, label: "Факт 1 — подпись", widget: string }
+          - { name: workValue, label: "Факт 1 — значение", widget: string }
+          - { name: placeLabel, label: "Факт 2 — подпись", widget: string }
+          - { name: placeValue, label: "Факт 2 — значение", widget: string }

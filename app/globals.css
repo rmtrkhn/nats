@@ -480,6 +480,7 @@ h2, .project-title {
 }
 
 .contact-links a,
+.contact-social a,
 .site-foot a,
 .prose a,
 .consent a,
@@ -488,10 +489,25 @@ h2, .project-title {
   text-underline-offset: 0.18em;
 }
 
-.contact-links a {
+.contact-links a,
+.contact-social a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
+}
+
+.contact-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 22px;
+  margin: 0;
+}
+
+.foot-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 0;
 }
 
 form { display: grid; gap: 12px; }

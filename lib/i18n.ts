@@ -1,3 +1,5 @@
+import studioEn from "../content/studio-en.json";
+import studioPl from "../content/studio-pl.json";
 import { ui as uiEn } from "../content/ui/en";
 import { ui as uiPl } from "../content/ui/pl";
 import { asset } from "./asset";
@@ -23,7 +25,15 @@ const paths: Record<Locale, Record<RouteId, string>> = {
 };
 
 export function getUi(locale: Locale) {
-  return locale === "en" ? uiEn : uiPl;
+  const ui = locale === "en" ? uiEn : uiPl;
+  const studio = locale === "en" ? studioEn : studioPl;
+  return {
+    ...ui,
+    home: {
+      ...ui.home,
+      ...studio,
+    },
+  };
 }
 
 export function localeHref(locale: Locale, route: RouteId, hash?: string) {

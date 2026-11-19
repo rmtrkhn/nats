@@ -8,8 +8,8 @@ import { imageSizes, projects } from "../../content/projects";
 export function HomePage({ locale }: { locale: Locale }) {
   const ui = getUi(locale);
   const copy = ui.home;
-  const cover = projects[0];
-  const hero = cover.frames[0];
+  const cover = projects.at(0);
+  const hero = cover?.frames.at(0);
 
   return (
     <>
@@ -17,23 +17,25 @@ export function HomePage({ locale }: { locale: Locale }) {
       <main id="top">
         <section className="hero">
           <div className="page hero-grid">
-            <div className="hero-visual">
-              <div className="frame" style={{ aspectRatio: "1050 / 1140" }}>
-                <img
-                  src={hero.src}
-                  srcSet={hero.srcSet}
-                  sizes={imageSizes}
-                  width={hero.width}
-                  height={hero.height}
-                  alt={`${cover.title} — ${hero.label}`}
-                  fetchPriority="high"
-                  decoding="async"
-                />
+            {cover && hero ? (
+              <div className="hero-visual">
+                <div className="frame" style={{ aspectRatio: "1050 / 1140" }}>
+                  <img
+                    src={hero.src}
+                    srcSet={hero.srcSet}
+                    sizes={imageSizes}
+                    width={hero.width}
+                    height={hero.height}
+                    alt={`${cover.title} — ${hero.label}`}
+                    fetchPriority="high"
+                    decoding="async"
+                  />
+                </div>
+                <p className="caption">
+                  {cover.title} · {hero.label}
+                </p>
               </div>
-              <p className="caption">
-                {cover.title} · {hero.label}
-              </p>
-            </div>
+            ) : null}
             <div className="hero-copy">
               <p className="kicker">{copy.heroKicker}</p>
               <h1>
