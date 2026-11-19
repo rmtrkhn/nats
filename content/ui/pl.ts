@@ -4,6 +4,8 @@ export const ui = {
     dziennik: "Dziennik",
     studio: "Studio",
     kontakt: "Kontakt",
+    menu: "Menu",
+    close: "Zamknij",
   },
   footer: {
     privacy: "Polityka prywatności",
