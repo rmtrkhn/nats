@@ -61,7 +61,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pl" className={`${display.variable} ${sans.variable}`}>
+    <html lang="pl" suppressHydrationWarning className={`${display.variable} ${sans.variable}`}>
       <body>{children}</body>
     </html>
   );

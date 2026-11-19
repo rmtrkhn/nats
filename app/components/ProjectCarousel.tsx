@@ -3,16 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import type { Frame } from "../../content/projects";
 import { imageSizes } from "../../content/projects";
-
-const roleLabel: Record<Frame["role"], string> = {
-  idea: "koncepcja",
-  plan: "układ",
-  light: "światło",
-  node: "węzeł",
-  material: "materiał",
-};
+import { type Locale, getUi } from "../../lib/i18n";
 
 export function ProjectCarousel({
+  locale,
   id,
   title,
   meta,
@@ -20,6 +14,7 @@ export function ProjectCarousel({
   frames,
   reverse,
 }: {
+  locale: Locale;
   id: string;
   title: string;
   meta: string;
@@ -27,6 +22,8 @@ export function ProjectCarousel({
   frames: readonly Frame[];
   reverse?: boolean;
 }) {
+  const carousel = getUi(locale).carousel;
+  const roleLabel = carousel.roles;
   const root = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const captions = useRef<HTMLParagraphElement[]>([]);
@@ -313,7 +310,7 @@ export function ProjectCarousel({
           className="carousel"
           ref={root}
           tabIndex={0}
-          aria-label={`${title}. Strzałki zmieniają kadr, kliknięcie powiększa.`}
+          aria-label={carousel.hint(title)}
         >
           <div className="carousel-track" ref={track}>
             {frames.map((item) => (
@@ -355,7 +352,7 @@ export function ProjectCarousel({
             </p>
           ))}
         </div>
-        <div className="carousel-dots" role="tablist" aria-label="Kadry">
+        <div className="carousel-dots" role="tablist" aria-label={carousel.frames}>
           {frames.map((item, i) => (
             <button
               key={item.src}
@@ -370,7 +367,7 @@ export function ProjectCarousel({
           ))}
         </div>
         <a className="btn ghost ask" href={`?projekt=${id}#kontakt`}>
-          Zapytaj o ten układ
+          {carousel.ask}
         </a>
       </div>
       <dialog
@@ -383,7 +380,7 @@ export function ProjectCarousel({
           <>
             <div className="lightbox-bar">
               <button type="button" className="icon-btn" onClick={() => dialog.current?.close()}>
-                Zamknij
+                {carousel.close}
               </button>
             </div>
             <figure className="lightbox-figure">
@@ -405,14 +402,14 @@ export function ProjectCarousel({
                 className="icon-btn"
                 onClick={() => setOpen((index) => (index === null ? 0 : (index - 1 + n) % n))}
               >
-                Wstecz
+                {carousel.back}
               </button>
               <button
                 type="button"
                 className="icon-btn"
                 onClick={() => setOpen((index) => (index === null ? 0 : (index + 1) % n))}
               >
-                Dalej
+                {carousel.forward}
               </button>
             </div>
           </>
