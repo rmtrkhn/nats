@@ -5,7 +5,7 @@ const JOURNAL_NUMBERS = [
 
 export const journalSpreads = JOURNAL_NUMBERS.map((n) => ({
   n,
-  src: `/journal/IMG_${n}.JPG`,
+  src: `/journal/IMG_${n}.webp`,
 }));
 
 export const journalPages = journalSpreads.map((item) => item.src);
