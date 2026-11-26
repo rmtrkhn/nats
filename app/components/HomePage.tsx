@@ -18,11 +18,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         <section className="issue issue-covers" id="realizacje">
           <header className="page issue-head">
             <div>
-              <h2>
-                {copy.issueTitle[0]}
-                <br />
-                <em>{copy.issueTitle[1]}</em>
-              </h2>
+              <h2>{copy.issueTitle}</h2>
             </div>
           </header>
           <CoverCarousel locale={locale} />

@@ -61,7 +61,7 @@ collections:
                     label: Файл
                     widget: image
                     choose_url: false
-                    hint: На сайте кадр обрезается до пропорции 1050×1140.
+                    hint: На сайте кадр показывается в исходных пропорциях файла.
                   - name: label
                     label: Подпись
                     widget: string

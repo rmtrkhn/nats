@@ -48,9 +48,6 @@ export function SiteHeader({
             <a href={localeHref(locale, "home", "#realizacje")} onClick={() => setOpen(false)}>
               {ui.nav.realizacje}
             </a>
-            <a href={localeHref(locale, "dziennik")} onClick={() => setOpen(false)}>
-              {ui.nav.dziennik}
-            </a>
             <a href={localeHref(locale, "home", "#studio")} onClick={() => setOpen(false)}>
               {ui.nav.studio}
             </a>

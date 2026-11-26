@@ -8,34 +8,53 @@
       "layout": "left",
       "frames": [
         {
-          "image": "/visuals/projects/01/salon.webp",
-          "label": "Salon, jodła, zielona sofa",
-          "role": "idea"
+          "image": "/visuals/projects/pod skosami/14 Salon.webp",
+          "label": "14 Salon",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/01/sciana-tv.webp",
-          "label": "Ściana TV i regał",
-          "role": "plan"
+          "image": "/visuals/projects/pod skosami/19 Salon.webp",
+          "label": "19 Salon",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/01/kuchnia.webp",
-          "label": "Wyspa i okno nad zlewem",
-          "role": "node"
+          "image": "/visuals/projects/pod skosami/03_Master_01.webp",
+          "label": "03 Master 01",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/01/lazienka-master.webp",
-          "label": "Master — terrazzo, owalne lustro",
-          "role": "material"
+          "image": "/visuals/projects/pod skosami/03_WC_04.webp",
+          "label": "03 WC 04",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/01/wanna.webp",
-          "label": "Wanna, płytka, ciepły sufit",
-          "role": "light"
+          "image": "/visuals/projects/pod skosami/13 Jadalnia.webp",
+          "label": "13 Jadalnia",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/01/reczniki.webp",
-          "label": "Szafka na ręczniki",
-          "role": "node"
+          "image": "/visuals/projects/pod skosami/41 Łazienka.webp",
+          "label": "41 Łazienka",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
+        },
+        {
+          "image": "/visuals/projects/pod skosami/42 Łazienka.webp",
+          "label": "42 Łazienka",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         }
       ]
     },
@@ -47,39 +66,74 @@
       "layout": "right",
       "frames": [
         {
-          "image": "/visuals/projects/10/salon.webp",
-          "label": "Bordowa sofa i ogród",
-          "role": "idea"
+          "image": "/visuals/projects/kamila/02_Salon_01.webp",
+          "label": "02 Salon 01",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/10/stol.webp",
-          "label": "Stół pod papierową lampą",
-          "role": "light"
+          "image": "/visuals/projects/kamila/02_Salon_02.webp",
+          "label": "02 Salon 02",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/10/wyspa.webp",
-          "label": "Żółta wyspa i stół",
-          "role": "node"
+          "image": "/visuals/projects/kamila/02_Salon_10.webp",
+          "label": "02 Salon 10",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/10/plytki.webp",
-          "label": "Wyspa z półką",
-          "role": "material"
+          "image": "/visuals/projects/kamila/02_Salon_11.webp",
+          "label": "02 Salon 11",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/10/schody.webp",
-          "label": "Schody i nisza na kawę",
-          "role": "plan"
+          "image": "/visuals/projects/kamila/01_Przedpokój_01.webp",
+          "label": "01 Przedpokój 01",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/10/przedpokoj.webp",
-          "label": "Czerwony sufit, mozaika",
-          "role": "plan"
+          "image": "/visuals/projects/kamila/01_Przedpokój_02.webp",
+          "label": "01 Przedpokój 02",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/10/wc.webp",
-          "label": "Kwiatowa tapeta, konsola",
-          "role": "material"
+          "image": "/visuals/projects/kamila/03_WC_01.webp",
+          "label": "03 WC 01",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
+        },
+        {
+          "image": "/visuals/projects/kamila/05_Łazienka 1_02.webp",
+          "label": "05 Łazienka 1 02",
+          "role": "idea",
+          "width": 1199,
+          "height": 1500
+        },
+        {
+          "image": "/visuals/projects/kamila/06_Sypialnia_01.webp",
+          "label": "06 Sypialnia 01",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
+        },
+        {
+          "image": "/visuals/projects/kamila/07_Łazienka_01.webp",
+          "label": "07 Łazienka 01",
+          "role": "idea",
+          "width": 1199,
+          "height": 1500
         }
       ]
     },
@@ -91,54 +145,95 @@
       "layout": "right",
       "frames": [
         {
-          "image": "/visuals/projects/08/salon.webp",
-          "label": "Lampiony nad zielonym fotelem",
-          "role": "idea"
+          "image": "/visuals/projects/marta/02_Salon_03.webp",
+          "label": "02 Salon 03",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/08/jadalnia.webp",
-          "label": "Stół, sofa, zielony marmur",
-          "role": "plan"
+          "image": "/visuals/projects/marta/02_Salon_04.webp",
+          "label": "02 Salon 04",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/08/antresola.webp",
-          "label": "Jadalnia ze schodów",
-          "role": "plan"
+          "image": "/visuals/projects/marta/02_Salon_07.webp",
+          "label": "02 Salon 07",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/08/kuchnia.webp",
-          "label": "Zielony kamień, gięty dąb",
-          "role": "material"
+          "image": "/visuals/projects/marta/02_Salon_09.webp",
+          "label": "02 Salon 09",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/08/stol.webp",
-          "label": "Stół przy zielonym blacie",
-          "role": "light"
+          "image": "/visuals/projects/marta/02_Salon_10.webp",
+          "label": "02 Salon 10",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/08/kawa.webp",
-          "label": "Nisza na ekspres przy schodach",
-          "role": "node"
+          "image": "/visuals/projects/marta/01_Przedpokój_02.webp",
+          "label": "01 Przedpokój 02",
+          "role": "idea",
+          "width": 1050,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/08/przedpokoj.webp",
-          "label": "Szafa z łukami, bordowy sufit",
-          "role": "idea"
+          "image": "/visuals/projects/marta/03_Piętro_03.webp",
+          "label": "03 Piętro 03",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/08/wc.webp",
-          "label": "Lustro w podkowę",
-          "role": "node"
+          "image": "/visuals/projects/marta/04_WC_03.webp",
+          "label": "04 WC 03",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/08/prysznic.webp",
-          "label": "Prysznic w beżowej płytce",
-          "role": "light"
+          "image": "/visuals/projects/marta/05_Łazienka1_01.webp",
+          "label": "05 Łazienka1 01",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/08/umywalka.webp",
-          "label": "Umywalka i świecące lustro",
-          "role": "material"
+          "image": "/visuals/projects/marta/05_Łazienka1_02.webp",
+          "label": "05 Łazienka1 02",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
+        },
+        {
+          "image": "/visuals/projects/marta/06_Sypialnia_04.webp",
+          "label": "06 Sypialnia 04",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
+        },
+        {
+          "image": "/visuals/projects/marta/07_Łazienka2_02.webp",
+          "label": "07 Łazienka2 02",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
+        },
+        {
+          "image": "/visuals/projects/marta/07_Łazienka2_06.webp",
+          "label": "07 Łazienka2 06",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         }
       ]
     },
@@ -150,44 +245,74 @@
       "layout": "left",
       "frames": [
         {
-          "image": "/visuals/projects/07/korytarz.webp",
-          "label": "Fornir jak mapa, czarna komoda",
-          "role": "idea"
+          "image": "/visuals/projects/stalowa/02_Salon_01.webp",
+          "label": "02 Salon 01",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/07/os.webp",
-          "label": "Oś na kobaltową kuchnię",
-          "role": "plan"
+          "image": "/visuals/projects/stalowa/02_Salon_03.webp",
+          "label": "02 Salon 03",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/07/salon.webp",
-          "label": "Salon i obraz nad szafką",
-          "role": "light"
+          "image": "/visuals/projects/stalowa/02_Salon_04.webp",
+          "label": "02 Salon 04",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/07/kobalt.webp",
-          "label": "Wyspa w kobalcie",
-          "role": "node"
+          "image": "/visuals/projects/stalowa/02_Salon_06.webp",
+          "label": "02 Salon 06",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/07/gabinet.webp",
-          "label": "Łuk drzwi do gabinetu",
-          "role": "plan"
+          "image": "/visuals/projects/stalowa/01_Korytarz_01a.webp",
+          "label": "01 Korytarz 01a",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/07/toaletka.webp",
-          "label": "Toaletka przy łóżku",
-          "role": "node"
+          "image": "/visuals/projects/stalowa/01_Korytarz_04.webp",
+          "label": "01 Korytarz 04",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/07/sypialnia.webp",
-          "label": "Łóżko, kobaltowa zasłona",
-          "role": "light"
+          "image": "/visuals/projects/stalowa/03_Gabinet_01.webp",
+          "label": "03 Gabinet 01",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/07/lazienka.webp",
-          "label": "Szachownica i ciemna płytka",
-          "role": "material"
+          "image": "/visuals/projects/stalowa/04_Łazienka_01.webp",
+          "label": "04 Łazienka 01",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
+        },
+        {
+          "image": "/visuals/projects/stalowa/05_Sypialnia_01.webp",
+          "label": "05 Sypialnia 01",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
+        },
+        {
+          "image": "/visuals/projects/stalowa/05_Sypialnia_05.webp",
+          "label": "05 Sypialnia 05",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         }
       ]
     },
@@ -199,44 +324,88 @@
       "layout": "right",
       "frames": [
         {
-          "image": "/visuals/projects/02/salon.webp",
-          "label": "Sofa, stół, kuchnia w głębi",
-          "role": "idea"
+          "image": "/visuals/projects/marymont/04_Salon_01.webp",
+          "label": "04 Salon 01",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/02/jadalnia.webp",
-          "label": "Obraz między kinkietami",
-          "role": "light"
+          "image": "/visuals/projects/marymont/04_Salon_02.webp",
+          "label": "04 Salon 02",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/02/kuchnia.webp",
-          "label": "Wyspa z dębu i mosiądz",
-          "role": "node"
+          "image": "/visuals/projects/marymont/04_Salon_04.webp",
+          "label": "04 Salon 04",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/02/biblioteka.webp",
-          "label": "Biblioteczka i fotel",
-          "role": "plan"
+          "image": "/visuals/projects/marymont/04_Salon_06.webp",
+          "label": "04 Salon 06",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/02/telewizor.webp",
-          "label": "Ściana TV, kule światła",
-          "role": "light"
+          "image": "/visuals/projects/marymont/01_Wejście_01a.webp",
+          "label": "01 Wejście 01a",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/02/os.webp",
-          "label": "Jedna oś: sofa, stół, wyspa",
-          "role": "plan"
+          "image": "/visuals/projects/marymont/03_Kuchnia_02.webp",
+          "label": "03 Kuchnia 02",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/02/stol.webp",
-          "label": "Stół przy boazerii",
-          "role": "node"
+          "image": "/visuals/projects/marymont/05_Łazienka_01b.webp",
+          "label": "05 Łazienka 01b",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/02/okno.webp",
-          "label": "Sofa na wprost okien",
-          "role": "light"
+          "image": "/visuals/projects/marymont/05_Łazienka_05.webp",
+          "label": "05 Łazienka 05",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
+        },
+        {
+          "image": "/visuals/projects/marymont/06_Sypialnia_03.webp",
+          "label": "06 Sypialnia 03",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
+        },
+        {
+          "image": "/visuals/projects/marymont/06_Sypialnia_05.webp",
+          "label": "06 Sypialnia 05",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
+        },
+        {
+          "image": "/visuals/projects/marymont/07_Gabinet_01.webp",
+          "label": "07 Gabinet 01",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
+        },
+        {
+          "image": "/visuals/projects/marymont/07_Gabinet_02.webp",
+          "label": "07 Gabinet 02",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         }
       ]
     },
@@ -248,44 +417,74 @@
       "layout": "right",
       "frames": [
         {
-          "image": "/visuals/projects/04/salon.webp",
-          "label": "Stół między schodami a sofą",
-          "role": "idea"
+          "image": "/visuals/projects/falenty/03_Salon_01.webp",
+          "label": "03 Salon 01",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/04/schody.webp",
-          "label": "Szklana balustrada",
-          "role": "plan"
+          "image": "/visuals/projects/falenty/03_Salon_02.webp",
+          "label": "03 Salon 02",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/04/stol.webp",
-          "label": "Stół widziany ze schodów",
-          "role": "node"
+          "image": "/visuals/projects/falenty/03_Salon_03.webp",
+          "label": "03 Salon 03",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/04/sofa.webp",
-          "label": "Sofa i okrągłe kinkiety",
-          "role": "light"
+          "image": "/visuals/projects/falenty/02_Kuchnia_01.webp",
+          "label": "02 Kuchnia 01",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/04/telewizor.webp",
-          "label": "Ściana TV w szczelinie światła",
-          "role": "light"
+          "image": "/visuals/projects/falenty/02_Kuchnia_03.webp",
+          "label": "02 Kuchnia 03",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/04/kuchnia.webp",
-          "label": "Ciemny dąb, kamienny blat",
-          "role": "material"
+          "image": "/visuals/projects/falenty/02_Kuchnia_04.webp",
+          "label": "02 Kuchnia 04",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/04/wc.webp",
-          "label": "Umywalka i prysznic",
-          "role": "node"
+          "image": "/visuals/projects/falenty/04_Schody_01.webp",
+          "label": "04 Schody 01",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/04/lazienka.webp",
-          "label": "Szczelina światła w szafie",
-          "role": "material"
+          "image": "/visuals/projects/falenty/05_WC_02.webp",
+          "label": "05 WC 02",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
+        },
+        {
+          "image": "/visuals/projects/falenty/06_Łazienka_02.webp",
+          "label": "06 Łazienka 02",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
+        },
+        {
+          "image": "/visuals/projects/falenty/06_Łazienka_04.webp",
+          "label": "06 Łazienka 04",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         }
       ]
     },
@@ -297,44 +496,74 @@
       "layout": "right",
       "frames": [
         {
-          "image": "/visuals/projects/06/wejscie.webp",
-          "label": "Konsola, łuk, kuchnia",
-          "role": "idea"
+          "image": "/visuals/projects/czarnowka/Farmhouse,_ciepłe_przytulne_wnętrze,_drewno,_kuchnia,_jodełka,_spiek (1).webp",
+          "label": "Farmhouse, ciepłe przytulne wnętrze, drewno, kuchnia, jodełka, spiek (1)",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/06/wyspa.webp",
-          "label": "Wyspa pod szklanymi kloszami",
-          "role": "node"
+          "image": "/visuals/projects/czarnowka/Farmhouse,_ciepłe_przytulne_wnętrze,_drewno,_kuchnia,_jodełka,_spiek (2).webp",
+          "label": "Farmhouse, ciepłe przytulne wnętrze, drewno, kuchnia, jodełka, spiek (2)",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/06/okap.webp",
-          "label": "Ryflowany okap, marmurowy blat",
-          "role": "material"
+          "image": "/visuals/projects/czarnowka/Farmhouse,_ciepłe_przytulne_wnętrze,_drewno,_kuchnia,_jodełka,_spiek (3).webp",
+          "label": "Farmhouse, ciepłe przytulne wnętrze, drewno, kuchnia, jodełka, spiek (3)",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/06/krzesla.webp",
-          "label": "Wyspa otwarta na salon",
-          "role": "plan"
+          "image": "/visuals/projects/czarnowka/Farmhouse,_ciepłe_przytulne_wnętrze,_drewno,_kuchnia,_jodełka,_spiek (4).webp",
+          "label": "Farmhouse, ciepłe przytulne wnętrze, drewno, kuchnia, jodełka, spiek (4)",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/06/jadalnia.webp",
-          "label": "Stół i witryna w łuku",
-          "role": "light"
+          "image": "/visuals/projects/czarnowka/Farmhouse,_ciepłe_przytulne_wnętrze,_drewno,_kuchnia,_jodełka,_spiek (5).webp",
+          "label": "Farmhouse, ciepłe przytulne wnętrze, drewno, kuchnia, jodełka, spiek (5)",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/06/luki.webp",
-          "label": "Trzy łuki nad sofą",
-          "role": "plan"
+          "image": "/visuals/projects/czarnowka/Farmhouse,_ciepłe_przytulne_wnętrze,_drewno,_kuchnia,_jodełka,_spiek (6).webp",
+          "label": "Farmhouse, ciepłe przytulne wnętrze, drewno, kuchnia, jodełka, spiek (6)",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/06/sofa.webp",
-          "label": "Sofa, łuki, światło w niszach",
-          "role": "light"
+          "image": "/visuals/projects/czarnowka/Farmhouse,_ciepłe_przytulne_wnętrze,_drewno,_kuchnia,_jodełka,_spiek (7).webp",
+          "label": "Farmhouse, ciepłe przytulne wnętrze, drewno, kuchnia, jodełka, spiek (7)",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         },
         {
-          "image": "/visuals/projects/06/kominek.webp",
-          "label": "Kominek w kamieniu",
-          "role": "material"
+          "image": "/visuals/projects/czarnowka/Farmhouse,_ciepłe_przytulne_wnętrze,_drewno,_kuchnia,_jodełka,_spiek (8).webp",
+          "label": "Farmhouse, ciepłe przytulne wnętrze, drewno, kuchnia, jodełka, spiek (8)",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
+        },
+        {
+          "image": "/visuals/projects/czarnowka/Farmhouse,_ciepłe_przytulne_wnętrze,_drewno,_kuchnia,_jodełka,_spiek (9).webp",
+          "label": "Farmhouse, ciepłe przytulne wnętrze, drewno, kuchnia, jodełka, spiek (9)",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
+        },
+        {
+          "image": "/visuals/projects/czarnowka/Farmhouse,_ciepłe_przytulne_wnętrze,_drewno,_kuchnia,_jodełka,_spiek.webp",
+          "label": "Farmhouse, ciepłe przytulne wnętrze, drewno, kuchnia, jodełka, spiek",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
         }
       ]
     },
@@ -346,39 +575,60 @@
       "layout": "left",
       "frames": [
         {
-          "image": "/visuals/projects/05/sofa.webp",
-          "label": "Sofa przy ciągu kuchni",
-          "role": "idea"
+          "image": "/visuals/projects/mokotow/02_salon, kuchnia, blat, szafa, meble_07.webp",
+          "label": "02 salon, kuchnia, blat, szafa, meble 07",
+          "role": "idea",
+          "width": 4284,
+          "height": 5712
         },
         {
-          "image": "/visuals/projects/05/blat.webp",
-          "label": "Marmur, bateria, kinkiety",
-          "role": "material"
+          "image": "/visuals/projects/mokotow/02_salon,_kuchnia,_blat,_szafa,_meble,_aesthetic_kitchen,_coffebar.webp",
+          "label": "02 salon, kuchnia, blat, szafa, meble, aesthetic kitchen, coffebar",
+          "role": "idea",
+          "width": 4037,
+          "height": 5383
         },
         {
-          "image": "/visuals/projects/05/marmur.webp",
-          "label": "Gruszka i złoty uchwyt",
-          "role": "material"
+          "image": "/visuals/projects/mokotow/02_salon,_kuchnia,_blat,_szafa,_meble,_salon,_sofa,_stolik_kawowy.webp",
+          "label": "02 salon, kuchnia, blat, szafa, meble, salon, sofa, stolik kawowy",
+          "role": "idea",
+          "width": 4284,
+          "height": 5712
         },
         {
-          "image": "/visuals/projects/05/ekspres.webp",
-          "label": "Ekspres w niszy",
-          "role": "node"
+          "image": "/visuals/projects/mokotow/02_salon,_kuchnia,_blat,_szafa,_meble,_salon,_stół,_kinkiet,_sztukateria.webp",
+          "label": "02 salon, kuchnia, blat, szafa, meble, salon, stół, kinkiet, sztukateria",
+          "role": "idea",
+          "width": 4194,
+          "height": 5592
         },
         {
-          "image": "/visuals/projects/05/nisza.webp",
-          "label": "Nisza kawowa, szerszy kadr",
-          "role": "node"
+          "image": "/visuals/projects/mokotow/02_salon,_kuchnia,_blat,_szafa,_meble,_salon,_stół,_korytarz,_lustro.webp",
+          "label": "02 salon, kuchnia, blat, szafa, meble, salon, stół, korytarz, lustro",
+          "role": "idea",
+          "width": 3230,
+          "height": 4307
         },
         {
-          "image": "/visuals/projects/05/stol.webp",
-          "label": "Czarny stół, welurowe krzesło",
-          "role": "plan"
+          "image": "/visuals/projects/mokotow/02_salon,_kuchnia,_blat,_szafa,_meble,_salon,_stół,_swzafka_RTV.webp",
+          "label": "02 salon, kuchnia, blat, szafa, meble, salon, stół, swzafka RTV",
+          "role": "idea",
+          "width": 2320,
+          "height": 3094
         },
         {
-          "image": "/visuals/projects/05/rtv.webp",
-          "label": "Szafka RTV i płyty",
-          "role": "light"
+          "image": "/visuals/projects/mokotow/01_łazienka_bathroom,_prysznic,_płytki,_klimatyczna_łazienka_01.webp",
+          "label": "01 łazienka bathroom, prysznic, płytki, klimatyczna łazienka 01",
+          "role": "idea",
+          "width": 4223,
+          "height": 5631
+        },
+        {
+          "image": "/visuals/projects/mokotow/03_sypialnia, home office, biuro domowe_01.webp",
+          "label": "03 sypialnia, home office, biuro domowe 01",
+          "role": "idea",
+          "width": 4208,
+          "height": 5611
         }
       ]
     }

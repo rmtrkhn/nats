@@ -12,7 +12,7 @@ export const ui = {
   },
   home: {
     journalSubtitle: "Portfolio",
-    issueTitle: ["Osiem wnętrz,", "pełna głębokość"],
+    issueTitle: "Katalog projektów",
     contactKicker: "Kontakt",
     contactTitle: "Rozmowa o metrażu.",
     contactLead: "Krótki opis mieszkania wystarczy.",

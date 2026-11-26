@@ -944,16 +944,8 @@ textarea:focus {
 }
 
 .journal-home .journal-viewport {
-  width: fit-content;
-  max-width: 100%;
-  margin-inline: auto;
-}
-
-.journal-home .journal-viewport img {
-  width: auto;
-  max-width: 100%;
-  max-height: calc(100vh - var(--nav-h) - 220px);
-  max-height: calc(100svh - var(--nav-h) - 220px);
+  width: 100%;
+  height: calc(100svh - var(--nav-h) - 220px);
 }
 
 .journal-gallery {
@@ -969,15 +961,21 @@ textarea:focus {
 }
 
 .journal-viewport {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: min(72vh, 640px);
   touch-action: pan-y;
   user-select: none;
 }
 
 .journal-viewport img {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
   height: auto;
-  max-height: min(72vh, 640px);
   margin-inline: auto;
   object-fit: contain;
   animation: journal-enter 0.32s ease;
@@ -1017,9 +1015,8 @@ textarea:focus {
 
   .journal-top { margin-bottom: 10px; }
 
-  .journal-viewport img {
-    max-height: calc(100vh - var(--nav-h) - 150px);
-    max-height: calc(100svh - var(--nav-h) - 150px);
+  .journal-home .journal-viewport {
+    height: calc(100svh - var(--nav-h) - 150px);
   }
 
   .journal-bottom { margin-top: 10px; }
@@ -1060,6 +1057,10 @@ textarea:focus {
 .covers {
   width: min(var(--page), calc(100% - 2 * var(--gutter)));
   margin: 0 auto 72px;
+}
+
+.covers-stage {
+  position: relative;
 }
 
 .covers-rail {
@@ -1114,18 +1115,21 @@ textarea:focus {
 }
 
 .covers-nav {
-  display: grid;
-  grid-template-columns: 44px minmax(0, 1fr) 44px;
-  align-items: center;
-  gap: 20px;
+  display: flex;
+  justify-content: center;
   margin-top: 22px;
 }
 
 .covers-arrow {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 28px;
   display: grid;
   place-items: center;
   width: 44px;
   height: 44px;
+  margin-block: auto;
   padding: 0;
   border: 0;
   border-radius: 50%;
@@ -1133,6 +1137,10 @@ textarea:focus {
   color: #fff;
   cursor: pointer;
 }
+
+.covers-arrow-prev { left: -18px; }
+
+.covers-arrow-next { right: -18px; }
 
 .covers-arrow svg {
   width: 22px;
@@ -1171,9 +1179,9 @@ textarea:focus {
 }
 
 .covers-lightbox::backdrop {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .covers-lightbox .icon-btn {
@@ -1192,15 +1200,6 @@ textarea:focus {
   min-width: 0;
 }
 
-.covers-lightbox-title {
-  margin: 0;
-  font-family: var(--font-display), serif;
-  font-size: clamp(26px, 3vw, 40px);
-  font-style: italic;
-  font-weight: 500;
-  text-align: center;
-}
-
 .covers-lightbox-stage {
   position: relative;
   display: flex;
@@ -1215,13 +1214,34 @@ textarea:focus {
   width: auto;
   height: auto;
   max-width: 100%;
-  max-height: calc(100svh - 220px);
+  max-height: calc(100svh - 148px);
   object-fit: contain;
   user-select: none;
 }
 
+.covers-lightbox-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 50%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.covers-lightbox-zone-prev { left: 0; }
+
+.covers-lightbox-zone-next { right: 0; }
+
+@media (pointer: coarse) {
+  .covers-lightbox-zone { display: none; }
+}
+
 .covers-lightbox-arrow {
   position: absolute;
+  z-index: 2;
   top: 50%;
   display: grid;
   place-items: center;
@@ -1282,12 +1302,14 @@ textarea:focus {
 @media (max-width: 800px) {
   .covers-card { flex-basis: calc((100% - 16px) / 1.35); }
 
-  .covers-lightbox-title { font-size: 24px; }
+  .covers-arrow-prev { left: -10px; }
+
+  .covers-arrow-next { right: -10px; }
 
   .covers-lightbox-body { gap: 12px; }
 
   .covers-lightbox-stage img {
-    max-height: calc(100svh - 188px);
+    max-height: calc(100svh - 132px);
   }
 
   .covers-lightbox-arrow-prev { left: 4px; }

@@ -6,6 +6,7 @@ export type FrameRole = "idea" | "plan" | "light" | "node" | "material";
 export type Frame = {
   src: string;
   srcSet: string;
+  original: string;
   width: number;
   height: number;
   label: string;
@@ -25,14 +26,12 @@ const roles = new Set<FrameRole>(["idea", "plan", "light", "node", "material"]);
 
 export const imageSizes = "(max-width: 800px) calc(100vw - 32px), 570px";
 
-const frameSize = [1050, 1140] as const;
-
-function photo(file: string, label: string, role: FrameRole): Frame {
-  const [width, height] = frameSize;
-  const src = `${asset(file)}?v=2`;
+function photo(file: string, label: string, role: FrameRole, width: number, height: number): Frame {
+  const src = `${asset(encodeURI(file))}?v=3`;
   return {
     src,
     srcSet: `${src} ${width}w`,
+    original: src,
     width,
     height,
     label,
@@ -63,7 +62,9 @@ const seen = new Set<string>();
 export const projects: Project[] = data.projects.flatMap((project, index) => {
   const frames = project.frames
     .filter((frame) => frame.image.trim())
-    .map((frame) => photo(imagePath(frame.image), frame.label, roleOf(frame.role)));
+    .map((frame) =>
+      photo(imagePath(frame.image), frame.label, roleOf(frame.role), frame.width, frame.height),
+    );
   if (!project.title.trim() || frames.length === 0) return [];
 
   let id = slug(project.id, index);

@@ -12,12 +12,13 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
   const pointerOpen = useRef(false);
   const drag = useRef({ x: 0, y: 0, left: 0, armed: false, moved: false });
   const swipe = useRef({ x: 0, armed: false });
+  const suppressClick = useRef(false);
   const [openId, setOpenId] = useState<string | null>(null);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [page, setPage] = useState(0);
   const [pages, setPages] = useState(1);
   const project = projects.find((item) => item.id === openId) ?? null;
-  const photos = project ? project.frames.slice(1) : [];
+  const photos = project ? project.frames : [];
   const photo = photos[photoIndex] ?? null;
 
   useEffect(() => {
@@ -104,9 +105,9 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
 
   function stepPhoto(delta: number) {
     setPhotoIndex((current) => {
-      const next = current + delta;
-      if (next < 0 || next >= photos.length) return current;
-      return next;
+      const count = photos.length;
+      if (count < 2) return current;
+      return (current + delta + count) % count;
     });
   }
 
@@ -177,55 +178,54 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
 
   return (
     <div className="covers">
-      <div
-        className="covers-rail"
-        ref={railRef}
+      <div className="covers-stage">
+        <div
+          className="covers-rail"
+          ref={railRef}
         tabIndex={0}
         aria-roledescription="karuzela"
         aria-label={carousel.covers}
-        onKeyDown={(event) => {
-          if (event.key === "ArrowRight") {
-            event.preventDefault();
-            scrollRail(1);
-          }
-          if (event.key === "ArrowLeft") {
-            event.preventDefault();
-            scrollRail(-1);
-          }
-        }}
-        onPointerDown={onRailPointerDown}
-        onPointerMove={onRailPointerMove}
-        onPointerUp={onRailPointerUp}
-        onPointerCancel={onRailPointerUp}
-      >
-        {projects.map((item) => {
+          onKeyDown={(event) => {
+            if (event.key === "ArrowRight") {
+              event.preventDefault();
+              scrollRail(1);
+            }
+            if (event.key === "ArrowLeft") {
+              event.preventDefault();
+              scrollRail(-1);
+            }
+          }}
+          onPointerDown={onRailPointerDown}
+          onPointerMove={onRailPointerMove}
+          onPointerUp={onRailPointerUp}
+          onPointerCancel={onRailPointerUp}
+        >
+          {projects.map((item) => {
           const cover = item.frames[0];
-          return (
-            <button
-              key={item.id}
-              type="button"
-              className="covers-card"
-              onClick={(event) => openProject(item.id, event.currentTarget, event.detail > 0)}
-              aria-label={carousel.open(item.title)}
-            >
-              <img
-                src={cover.src}
-                srcSet={cover.srcSet}
-                sizes="(max-width: 800px) 72vw, 280px"
-                alt=""
-                draggable={false}
-                decoding="async"
-              />
-              <strong>{carousel.named(item.title)}</strong>
-            </button>
-          );
-        })}
-      </div>
-
-      <div className="covers-nav">
+            return (
+              <button
+                key={item.id}
+                type="button"
+                className="covers-card"
+                onClick={(event) => openProject(item.id, event.currentTarget, event.detail > 0)}
+                aria-label={carousel.open(item.title)}
+              >
+                <img
+                  src={cover.src}
+                  srcSet={cover.srcSet}
+                  sizes="(max-width: 800px) 72vw, 280px"
+                  alt=""
+                  draggable={false}
+                  decoding="async"
+                />
+                <strong>{carousel.named(item.title)}</strong>
+              </button>
+            );
+          })}
+        </div>
         <button
           type="button"
-          className="covers-arrow"
+          className="covers-arrow covers-arrow-prev"
           aria-label={carousel.back}
           disabled={page <= 0}
           onClick={() => scrollRail(-1)}
@@ -234,6 +234,20 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
             <path d="M14.5 5.5 L8 12 l6.5 6.5" fill="none" stroke="currentColor" strokeWidth="1.6" />
           </svg>
         </button>
+        <button
+          type="button"
+          className="covers-arrow covers-arrow-next"
+          aria-label={carousel.forward}
+          disabled={page >= pages - 1}
+          onClick={() => scrollRail(1)}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9.5 5.5 L16 12 l-6.5 6.5" fill="none" stroke="currentColor" strokeWidth="1.6" />
+          </svg>
+        </button>
+      </div>
+
+      <div className="covers-nav">
         <div
           className="covers-progress"
           role="progressbar"
@@ -246,17 +260,6 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
             <span key={index} className={index <= page ? "is-on" : ""} />
           ))}
         </div>
-        <button
-          type="button"
-          className="covers-arrow"
-          aria-label={carousel.forward}
-          disabled={page >= pages - 1}
-          onClick={() => scrollRail(1)}
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M9.5 5.5 L16 12 l-6.5 6.5" fill="none" stroke="currentColor" strokeWidth="1.6" />
-          </svg>
-        </button>
       </div>
 
       <dialog
@@ -292,7 +295,6 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
               </button>
             </div>
             <div className="covers-lightbox-body">
-              <p className="covers-lightbox-title">{carousel.named(project.title)}</p>
               {photo ? (
                 <div
                   className="covers-lightbox-stage"
@@ -305,6 +307,7 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
                     const dx = event.clientX - swipe.current.x;
                     swipe.current.armed = false;
                     if (Math.abs(dx) < 40) return;
+                    suppressClick.current = true;
                     stepPhoto(dx < 0 ? 1 : -1);
                   }}
                   onPointerCancel={() => {
@@ -312,16 +315,39 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
                   }}
                 >
                   <img
-                    key={photo.src}
-                    src={photo.src}
+                    key={photo.original}
+                    src={photo.original}
                     alt={`${project.title} — ${photo.label}`}
                     draggable={false}
                   />
                   <button
                     type="button"
+                    className="covers-lightbox-zone covers-lightbox-zone-prev"
+                    aria-label={carousel.back}
+                    onClick={() => {
+                      if (suppressClick.current) {
+                        suppressClick.current = false;
+                        return;
+                      }
+                      stepPhoto(-1);
+                    }}
+                  />
+                  <button
+                    type="button"
+                    className="covers-lightbox-zone covers-lightbox-zone-next"
+                    aria-label={carousel.forward}
+                    onClick={() => {
+                      if (suppressClick.current) {
+                        suppressClick.current = false;
+                        return;
+                      }
+                      stepPhoto(1);
+                    }}
+                  />
+                  <button
+                    type="button"
                     className="covers-lightbox-arrow covers-lightbox-arrow-prev"
                     aria-label={carousel.back}
-                    disabled={photoIndex === 0}
                     onPointerDown={(event) => event.stopPropagation()}
                     onClick={() => stepPhoto(-1)}
                   >
@@ -333,7 +359,6 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
                     type="button"
                     className="covers-lightbox-arrow covers-lightbox-arrow-next"
                     aria-label={carousel.forward}
-                    disabled={photoIndex === photos.length - 1}
                     onPointerDown={(event) => event.stopPropagation()}
                     onClick={() => stepPhoto(1)}
                   >
