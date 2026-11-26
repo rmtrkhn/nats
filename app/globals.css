@@ -1097,19 +1097,15 @@ textarea:focus {
   pointer-events: none;
 }
 
-.covers-meta {
+.covers-card strong {
+  font-family: var(--font-sans), system-ui, sans-serif;
   font-size: 11px;
+  font-weight: 300;
+  font-style: normal;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
-}
-
-.covers-card strong {
-  font-family: var(--font-display), serif;
-  font-size: clamp(22px, 2vw, 28px);
-  font-weight: 500;
-  font-style: italic;
-  line-height: 1.1;
+  line-height: 1.4;
 }
 
 .covers-card:focus,
@@ -1119,26 +1115,49 @@ textarea:focus {
 
 .covers-nav {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
   align-items: center;
+  gap: 20px;
   margin-top: 22px;
 }
 
-.covers-action {
-  justify-self: start;
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  background: none;
-  border: 0;
+.covers-arrow {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
   padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(28, 27, 25, 0.55);
+  color: #fff;
   cursor: pointer;
 }
 
-.covers-action-next { justify-self: end; }
+.covers-arrow svg {
+  width: 22px;
+  height: 22px;
+}
 
-.covers-action:hover { color: var(--ink); }
+.covers-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.covers-progress {
+  display: flex;
+  gap: 4px;
+  width: min(240px, 100%);
+  justify-self: center;
+}
+
+.covers-progress span {
+  flex: 1;
+  height: 2px;
+  background: rgba(28, 27, 25, 0.18);
+}
+
+.covers-progress span.is-on { background: var(--ink); }
 
 .covers-lightbox {
   overflow: hidden;

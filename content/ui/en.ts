@@ -12,7 +12,6 @@ export const ui = {
   },
   home: {
     journalSubtitle: "Portfolio",
-    issueKicker: "Projects",
     issueTitle: ["Eight interiors,", "in full depth"],
     contactKicker: "Contact",
     contactTitle: "A conversation about your space.",
@@ -37,6 +36,7 @@ export const ui = {
     },
     hint: (title: string) => `${title}. Arrow keys change the frame; click to enlarge.`,
     covers: "Projects",
+    named: (title: string) => `Project ${title}`,
     open: (title: string) => `Open photos of ${title}`,
     preview: (title: string) => `Photos of ${title}`,
     frames: "Frames",

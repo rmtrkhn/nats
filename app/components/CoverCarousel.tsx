@@ -14,6 +14,8 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
   const swipe = useRef({ x: 0, armed: false });
   const [openId, setOpenId] = useState<string | null>(null);
   const [photoIndex, setPhotoIndex] = useState(0);
+  const [page, setPage] = useState(0);
+  const [pages, setPages] = useState(1);
   const project = projects.find((item) => item.id === openId) ?? null;
   const photos = project ? project.frames.slice(1) : [];
   const photo = photos[photoIndex] ?? null;
@@ -31,6 +33,45 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
     };
     rail.addEventListener("wheel", onWheel, { passive: false });
     return () => rail.removeEventListener("wheel", onWheel);
+  }, []);
+
+  function readRail() {
+    const rail = railRef.current;
+    const card = rail?.querySelector<HTMLElement>(".covers-card");
+    if (!rail || !card) return { page: 0, pages: 1 };
+    const step = card.offsetWidth + 16;
+    const max = Math.max(0, Math.round((rail.scrollWidth - rail.clientWidth) / step));
+    const index = Math.min(max, Math.max(0, Math.round(rail.scrollLeft / step)));
+    return { page: index, pages: max + 1 };
+  }
+
+  useLayoutEffect(() => {
+    const next = readRail();
+    setPage(next.page);
+    setPages(next.pages);
+  }, []);
+
+  useEffect(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const next = readRail();
+      setPage(next.page);
+      setPages(next.pages);
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    rail.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      rail.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", update);
+    };
   }, []);
 
   useLayoutEffect(() => {
@@ -175,19 +216,46 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
                 draggable={false}
                 decoding="async"
               />
-              <span className="covers-meta">{item.meta}</span>
-              <strong>{item.title}</strong>
+              <strong>{carousel.named(item.title)}</strong>
             </button>
           );
         })}
       </div>
 
       <div className="covers-nav">
-        <button type="button" className="covers-action" onClick={() => scrollRail(-1)}>
-          {carousel.back}
+        <button
+          type="button"
+          className="covers-arrow"
+          aria-label={carousel.back}
+          disabled={page <= 0}
+          onClick={() => scrollRail(-1)}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14.5 5.5 L8 12 l6.5 6.5" fill="none" stroke="currentColor" strokeWidth="1.6" />
+          </svg>
         </button>
-        <button type="button" className="covers-action covers-action-next" onClick={() => scrollRail(1)}>
-          {carousel.forward}
+        <div
+          className="covers-progress"
+          role="progressbar"
+          aria-valuemin={1}
+          aria-valuemax={pages}
+          aria-valuenow={page + 1}
+          aria-label={carousel.covers}
+        >
+          {Array.from({ length: pages }, (_, index) => (
+            <span key={index} className={index <= page ? "is-on" : ""} />
+          ))}
+        </div>
+        <button
+          type="button"
+          className="covers-arrow"
+          aria-label={carousel.forward}
+          disabled={page >= pages - 1}
+          onClick={() => scrollRail(1)}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9.5 5.5 L16 12 l-6.5 6.5" fill="none" stroke="currentColor" strokeWidth="1.6" />
+          </svg>
         </button>
       </div>
 
@@ -224,7 +292,7 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
               </button>
             </div>
             <div className="covers-lightbox-body">
-              <p className="covers-lightbox-title">{project.title}</p>
+              <p className="covers-lightbox-title">{carousel.named(project.title)}</p>
               {photo ? (
                 <div
                   className="covers-lightbox-stage"

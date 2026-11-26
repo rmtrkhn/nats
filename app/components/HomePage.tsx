@@ -18,7 +18,6 @@ export function HomePage({ locale }: { locale: Locale }) {
         <section className="issue issue-covers" id="realizacje">
           <header className="page issue-head">
             <div>
-              <p className="kicker">{copy.issueKicker}</p>
               <h2>
                 {copy.issueTitle[0]}
                 <br />

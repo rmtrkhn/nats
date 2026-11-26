@@ -12,7 +12,6 @@ export const ui = {
   },
   home: {
     journalSubtitle: "Portfolio",
-    issueKicker: "Realizacje",
     issueTitle: ["Osiem wnętrz,", "pełna głębokość"],
     contactKicker: "Kontakt",
     contactTitle: "Rozmowa o metrażu.",
@@ -37,6 +36,7 @@ export const ui = {
     },
     hint: (title: string) => `${title}. Strzałki zmieniają kadr, kliknięcie powiększa.`,
     covers: "Projekty",
+    named: (title: string) => `Projekt ${title}`,
     open: (title: string) => `Otwórz zdjęcia projektu ${title}`,
     preview: (title: string) => `Zdjęcia projektu ${title}`,
     frames: "Kadry",
