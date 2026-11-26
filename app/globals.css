@@ -1142,12 +1142,27 @@ textarea:focus {
 
 .covers-lightbox {
   overflow: hidden;
+  background: transparent;
+  color: var(--ink);
   padding:
     max(56px, env(safe-area-inset-top))
     max(16px, env(safe-area-inset-right))
     max(20px, env(safe-area-inset-bottom))
     max(16px, env(safe-area-inset-left));
 }
+
+.covers-lightbox::backdrop {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.covers-lightbox .icon-btn {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.covers-lightbox :focus-visible { outline-color: var(--ink); }
 
 .covers-lightbox-body {
   display: flex;
@@ -1225,16 +1240,24 @@ textarea:focus {
 .covers-lightbox-progress span {
   flex: 1;
   height: 2px;
-  background: rgba(255, 255, 255, 0.28);
+  background: rgba(28, 27, 25, 0.18);
 }
 
-.covers-lightbox-progress span.is-on { background: #fff; }
+.covers-lightbox-progress span.is-on { background: var(--ink); }
 
 .covers-lightbox-count {
   margin: -8px 0 0;
   font-size: 13px;
   letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--muted);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .covers-lightbox::backdrop {
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 
 @media (max-width: 800px) {
