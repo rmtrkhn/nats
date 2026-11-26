@@ -935,6 +935,23 @@ textarea:focus {
   color: var(--muted);
 }
 
+.journal-home .journal-grid {
+  width: min(var(--page), 100%);
+}
+
+.journal-home .journal-viewport {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.journal-home .journal-viewport img {
+  width: auto;
+  max-width: 100%;
+  max-height: calc(100vh - var(--nav-h) - 220px);
+  max-height: calc(100svh - var(--nav-h) - 220px);
+}
+
 .journal-gallery {
   position: relative;
 }

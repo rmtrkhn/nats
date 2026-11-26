@@ -11,9 +11,7 @@ export const ui = {
     privacy: "Privacy policy",
   },
   home: {
-    heroKicker: "Warsaw",
-    heroTitle: ["Interiors", "that stay."],
-    heroLead: "Ten interior projects. From axis and light to detail and material.",
+    journalSubtitle: "Portfolio of works",
     issueKicker: "Projects",
     issueTitle: ["Ten interiors,", "in full depth"],
     contactKicker: "Contact",

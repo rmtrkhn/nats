@@ -5,8 +5,18 @@ import { journalSpreads } from "../../content/journal";
 import { asset } from "../../lib/asset";
 import { type Locale, getUi } from "../../lib/i18n";
 
-export function Journal({ locale }: { locale: Locale }) {
+export function Journal({
+  locale,
+  title,
+  subtitle,
+}: {
+  locale: Locale;
+  title?: string;
+  subtitle?: string;
+}) {
   const j = getUi(locale).journal;
+  const home = Boolean(subtitle) && !title;
+  const heading = title ?? subtitle ?? j.title;
   const [index, setIndex] = useState(0);
   const drag = useRef({ x: 0, y: 0, armed: false });
   const count = journalSpreads.length;
@@ -43,16 +53,16 @@ export function Journal({ locale }: { locale: Locale }) {
 
   return (
     <section
-      className="journal"
+      className={home ? "journal journal-home" : "journal"}
       id="dziennik"
       tabIndex={0}
       onKeyDown={onKeyDown}
       aria-roledescription="karuzela"
-      aria-label={j.aria}
+      aria-label={heading}
     >
       <div className="journal-grid">
         <header className="journal-top">
-          <h1 className="journal-title">{j.title}</h1>
+          <h1 className="journal-title">{heading}</h1>
         </header>
 
         <div className="journal-gallery">
@@ -72,7 +82,7 @@ export function Journal({ locale }: { locale: Locale }) {
               key={src}
               src={src}
               sizes="(min-width: 1200px) 80vw, (min-width: 760px) 90vw, 90vw"
-              alt={`${j.title}, ${index + 1} / ${count}`}
+              alt={`${heading}, ${index + 1} / ${count}`}
               decoding="async"
               fetchPriority={index === 0 ? "high" : "auto"}
               draggable={false}

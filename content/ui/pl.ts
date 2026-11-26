@@ -11,9 +11,7 @@ export const ui = {
     privacy: "Polityka prywatności",
   },
   home: {
-    heroKicker: "Warszawa",
-    heroTitle: ["Wnętrza,", "które zostają."],
-    heroLead: "Dziesięć realizacji. Od osi i światła do węzła i faktury.",
+    journalSubtitle: "Portfolio prac",
     issueKicker: "Realizacje",
     issueTitle: ["Dziesięć wnętrz,", "pełna głębokość"],
     contactKicker: "Kontakt",
