@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { projects } from "../../content/projects";
 import { type Locale, getUi } from "../../lib/i18n";
 
@@ -9,6 +9,7 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
   const railRef = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const openerRef = useRef<HTMLButtonElement | null>(null);
+  const pointerOpen = useRef(false);
   const drag = useRef({ x: 0, y: 0, left: 0, armed: false, moved: false });
   const swipe = useRef({ x: 0, armed: false });
   const [openId, setOpenId] = useState<string | null>(null);
@@ -32,21 +33,29 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
     return () => rail.removeEventListener("wheel", onWheel);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const node = dialogRef.current;
     if (!node) return;
     if (!project) {
       if (node.open) node.close();
       return;
     }
-    if (!node.open) node.showModal();
+    if (!node.open) {
+      const fromPointer = pointerOpen.current;
+      pointerOpen.current = false;
+      node.showModal();
+      // Esc leaves keyboard focus on, so the next showModal() rings a control
+      // inside the preview. A click should not show that ring.
+      if (fromPointer) node.focus({ preventScroll: true });
+    }
   }, [project]);
 
-  function openProject(id: string, button: HTMLButtonElement) {
+  function openProject(id: string, button: HTMLButtonElement, fromPointer: boolean) {
     if (drag.current.moved) {
       drag.current.moved = false;
       return;
     }
+    pointerOpen.current = fromPointer;
     openerRef.current = button;
     setPhotoIndex(0);
     setOpenId(id);
@@ -155,7 +164,7 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
               key={item.id}
               type="button"
               className="covers-card"
-              onClick={(event) => openProject(item.id, event.currentTarget)}
+              onClick={(event) => openProject(item.id, event.currentTarget, event.detail > 0)}
               aria-label={carousel.open(item.title)}
             >
               <img
@@ -184,11 +193,14 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
 
       <dialog
         className="lightbox covers-lightbox"
+        tabIndex={-1}
         ref={dialogRef}
         aria-label={project ? carousel.preview(project.title) : carousel.covers}
         onClose={() => {
+          const opener = openerRef.current;
           setOpenId(null);
-          openerRef.current?.focus({ preventScroll: true });
+          // Wait until Esc finishes restoring focus, or the ring lands on Wstecz.
+          requestAnimationFrame(() => opener?.focus({ preventScroll: true }));
         }}
         onClick={(event) => {
           if (event.target === event.currentTarget) event.currentTarget.close();
