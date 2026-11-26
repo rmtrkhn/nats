@@ -1050,3 +1050,218 @@ textarea:focus {
 @media (prefers-reduced-motion: reduce) {
   .journal-viewport img { animation: none; }
 }
+
+.issue-covers .issue-head { margin-bottom: 36px; }
+
+.covers {
+  width: min(var(--page), calc(100% - 2 * var(--gutter)));
+  margin: 0 auto 72px;
+}
+
+.covers-rail {
+  display: flex;
+  gap: 16px;
+  overflow: hidden;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+  outline: none;
+}
+
+.covers-rail:active { cursor: grabbing; }
+
+.covers-card {
+  display: flex;
+  flex: 0 0 calc((100% - 48px) / 4);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.covers-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.covers-meta {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.covers-card strong {
+  font-family: var(--font-display), serif;
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.1;
+}
+
+.covers-card:focus,
+.covers-card:focus-visible {
+  outline: none;
+}
+
+.covers-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  margin-top: 22px;
+}
+
+.covers-action {
+  justify-self: start;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.covers-action-next { justify-self: end; }
+
+.covers-action:hover { color: var(--ink); }
+
+.covers-lightbox {
+  overflow: hidden;
+  padding:
+    max(56px, env(safe-area-inset-top))
+    max(16px, env(safe-area-inset-right))
+    max(20px, env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-left));
+}
+
+.covers-lightbox-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: min(920px, 100%);
+  min-width: 0;
+}
+
+.covers-lightbox-title {
+  margin: 0;
+  font-family: var(--font-display), serif;
+  font-size: clamp(26px, 3vw, 40px);
+  font-style: italic;
+  font-weight: 500;
+  text-align: center;
+}
+
+.covers-lightbox-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  touch-action: pan-y;
+}
+
+.covers-lightbox-stage img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100svh - 220px);
+  object-fit: contain;
+  user-select: none;
+}
+
+.covers-lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-top: -22px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(28, 27, 25, 0.55);
+  color: #fff;
+  cursor: pointer;
+}
+
+.covers-lightbox-arrow svg {
+  width: 22px;
+  height: 22px;
+}
+
+.covers-lightbox-arrow-prev { left: 8px; }
+
+.covers-lightbox-arrow-next { right: 8px; }
+
+.covers-lightbox-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.covers-lightbox-progress {
+  display: flex;
+  gap: 4px;
+  width: min(240px, 100%);
+}
+
+.covers-lightbox-progress span {
+  flex: 1;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.covers-lightbox-progress span.is-on { background: #fff; }
+
+.covers-lightbox-count {
+  margin: -8px 0 0;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 800px) {
+  .covers-card { flex-basis: calc((100% - 16px) / 1.35); }
+
+  .covers-lightbox-title { font-size: 24px; }
+
+  .covers-lightbox-body { gap: 12px; }
+
+  .covers-lightbox-stage img {
+    max-height: calc(100svh - 188px);
+  }
+
+  .covers-lightbox-arrow-prev { left: 4px; }
+
+  .covers-lightbox-arrow-next { right: 4px; }
+}
+
+.lightbox-ask {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  border-color: #fff;
+  color: #fff;
+}
+
+.lightbox-ask:hover {
+  background: #fff;
+  color: var(--ink);
+}
+
+@media (max-height: 520px) {
+  .lightbox-ask { position: static; margin-top: 12px; }
+}

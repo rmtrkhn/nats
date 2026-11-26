@@ -1,10 +1,9 @@
 import { ContactSection } from "./ContactSection";
+import { CoverCarousel } from "./CoverCarousel";
 import { Journal } from "./Journal";
-import { ProjectCarousel } from "./ProjectCarousel";
 import { SiteFooter } from "./SiteFooter";
 import { SiteHeader } from "./SiteHeader";
 import { type Locale, getUi } from "../../lib/i18n";
-import { projects } from "../../content/projects";
 
 export function HomePage({ locale }: { locale: Locale }) {
   const ui = getUi(locale);
@@ -16,7 +15,7 @@ export function HomePage({ locale }: { locale: Locale }) {
       <main id="top">
         <Journal locale={locale} subtitle={copy.journalSubtitle} />
 
-        <section className="issue" id="realizacje">
+        <section className="issue issue-covers" id="realizacje">
           <header className="page issue-head">
             <div>
               <p className="kicker">{copy.issueKicker}</p>
@@ -27,18 +26,7 @@ export function HomePage({ locale }: { locale: Locale }) {
               </h2>
             </div>
           </header>
-          {projects.map((project) => (
-            <ProjectCarousel
-              key={project.id}
-              locale={locale}
-              id={project.id}
-              title={project.title}
-              meta={project.meta}
-              copy={project.copy}
-              frames={project.frames}
-              reverse={project.layout === "right"}
-            />
-          ))}
+          <CoverCarousel locale={locale} />
         </section>
 
         <section className="band" id="studio">
