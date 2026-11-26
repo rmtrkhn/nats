@@ -1,6 +1,71 @@
 {
   "projects": [
     {
+      "id": "mokotow",
+      "title": "Mokotów",
+      "meta": "Warszawa · kuchnia otwarta",
+      "copy": "Marmur, ciemny fornir, złote uchwyty. Ekspres stoi w niszy, sofa po drugiej stronie blatu.",
+      "layout": "left",
+      "frames": [
+        {
+          "image": "/visuals/projects/mokotow/02_salon, kuchnia, blat, szafa, meble_07.webp",
+          "label": "02 salon, kuchnia, blat, szafa, meble 07",
+          "role": "idea",
+          "width": 4284,
+          "height": 5712
+        },
+        {
+          "image": "/visuals/projects/mokotow/02_salon,_kuchnia,_blat,_szafa,_meble,_aesthetic_kitchen,_coffebar.webp",
+          "label": "02 salon, kuchnia, blat, szafa, meble, aesthetic kitchen, coffebar",
+          "role": "idea",
+          "width": 4037,
+          "height": 5383
+        },
+        {
+          "image": "/visuals/projects/mokotow/02_salon,_kuchnia,_blat,_szafa,_meble,_salon,_sofa,_stolik_kawowy.webp",
+          "label": "02 salon, kuchnia, blat, szafa, meble, salon, sofa, stolik kawowy",
+          "role": "idea",
+          "width": 4284,
+          "height": 5712
+        },
+        {
+          "image": "/visuals/projects/mokotow/02_salon,_kuchnia,_blat,_szafa,_meble,_salon,_stół,_kinkiet,_sztukateria.webp",
+          "label": "02 salon, kuchnia, blat, szafa, meble, salon, stół, kinkiet, sztukateria",
+          "role": "idea",
+          "width": 4194,
+          "height": 5592
+        },
+        {
+          "image": "/visuals/projects/mokotow/02_salon,_kuchnia,_blat,_szafa,_meble,_salon,_stół,_korytarz,_lustro.webp",
+          "label": "02 salon, kuchnia, blat, szafa, meble, salon, stół, korytarz, lustro",
+          "role": "idea",
+          "width": 3230,
+          "height": 4307
+        },
+        {
+          "image": "/visuals/projects/mokotow/02_salon,_kuchnia,_blat,_szafa,_meble,_salon,_stół,_swzafka_RTV.webp",
+          "label": "02 salon, kuchnia, blat, szafa, meble, salon, stół, swzafka RTV",
+          "role": "idea",
+          "width": 2320,
+          "height": 3094
+        },
+        {
+          "image": "/visuals/projects/mokotow/01_łazienka_bathroom,_prysznic,_płytki,_klimatyczna_łazienka_01.webp",
+          "label": "01 łazienka bathroom, prysznic, płytki, klimatyczna łazienka 01",
+          "role": "idea",
+          "width": 4223,
+          "height": 5631
+        },
+        {
+          "image": "/visuals/projects/mokotow/03_sypialnia, home office, biuro domowe_01.webp",
+          "label": "03 sypialnia, home office, biuro domowe 01",
+          "role": "idea",
+          "width": 4208,
+          "height": 5611
+        }
+      ]
+    },
+    {
       "id": "pod-skosami",
       "title": "Pod skosami",
       "meta": "Warszawa · wysoki strop",
@@ -564,71 +629,6 @@
           "role": "idea",
           "width": 1200,
           "height": 1500
-        }
-      ]
-    },
-    {
-      "id": "mokotow",
-      "title": "Mokotów",
-      "meta": "Warszawa · kuchnia otwarta",
-      "copy": "Marmur, ciemny fornir, złote uchwyty. Ekspres stoi w niszy, sofa po drugiej stronie blatu.",
-      "layout": "left",
-      "frames": [
-        {
-          "image": "/visuals/projects/mokotow/02_salon, kuchnia, blat, szafa, meble_07.webp",
-          "label": "02 salon, kuchnia, blat, szafa, meble 07",
-          "role": "idea",
-          "width": 4284,
-          "height": 5712
-        },
-        {
-          "image": "/visuals/projects/mokotow/02_salon,_kuchnia,_blat,_szafa,_meble,_aesthetic_kitchen,_coffebar.webp",
-          "label": "02 salon, kuchnia, blat, szafa, meble, aesthetic kitchen, coffebar",
-          "role": "idea",
-          "width": 4037,
-          "height": 5383
-        },
-        {
-          "image": "/visuals/projects/mokotow/02_salon,_kuchnia,_blat,_szafa,_meble,_salon,_sofa,_stolik_kawowy.webp",
-          "label": "02 salon, kuchnia, blat, szafa, meble, salon, sofa, stolik kawowy",
-          "role": "idea",
-          "width": 4284,
-          "height": 5712
-        },
-        {
-          "image": "/visuals/projects/mokotow/02_salon,_kuchnia,_blat,_szafa,_meble,_salon,_stół,_kinkiet,_sztukateria.webp",
-          "label": "02 salon, kuchnia, blat, szafa, meble, salon, stół, kinkiet, sztukateria",
-          "role": "idea",
-          "width": 4194,
-          "height": 5592
-        },
-        {
-          "image": "/visuals/projects/mokotow/02_salon,_kuchnia,_blat,_szafa,_meble,_salon,_stół,_korytarz,_lustro.webp",
-          "label": "02 salon, kuchnia, blat, szafa, meble, salon, stół, korytarz, lustro",
-          "role": "idea",
-          "width": 3230,
-          "height": 4307
-        },
-        {
-          "image": "/visuals/projects/mokotow/02_salon,_kuchnia,_blat,_szafa,_meble,_salon,_stół,_swzafka_RTV.webp",
-          "label": "02 salon, kuchnia, blat, szafa, meble, salon, stół, swzafka RTV",
-          "role": "idea",
-          "width": 2320,
-          "height": 3094
-        },
-        {
-          "image": "/visuals/projects/mokotow/01_łazienka_bathroom,_prysznic,_płytki,_klimatyczna_łazienka_01.webp",
-          "label": "01 łazienka bathroom, prysznic, płytki, klimatyczna łazienka 01",
-          "role": "idea",
-          "width": 4223,
-          "height": 5631
-        },
-        {
-          "image": "/visuals/projects/mokotow/03_sypialnia, home office, biuro domowe_01.webp",
-          "label": "03 sypialnia, home office, biuro domowe 01",
-          "role": "idea",
-          "width": 4208,
-          "height": 5611
         }
       ]
     }

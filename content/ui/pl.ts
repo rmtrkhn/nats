@@ -12,7 +12,7 @@ export const ui = {
   },
   home: {
     journalSubtitle: "Portfolio",
-    issueTitle: "Katalog projektów",
+    issueTitle: "Projekty",
     contactKicker: "Kontakt",
     contactTitle: "Rozmowa o metrażu.",
     contactLead: "Krótki opis mieszkania wystarczy.",
@@ -37,6 +37,8 @@ export const ui = {
     hint: (title: string) => `${title}. Strzałki zmieniają kadr, kliknięcie powiększa.`,
     covers: "Projekty",
     named: (title: string) => `Projekt ${title}`,
+    realizacja: "Realizacja",
+    wizualizacja: "Wizualizacja",
     open: (title: string) => `Otwórz zdjęcia projektu ${title}`,
     preview: (title: string) => `Zdjęcia projektu ${title}`,
     frames: "Kadry",

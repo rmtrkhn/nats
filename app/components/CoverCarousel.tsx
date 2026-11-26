@@ -218,7 +218,9 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
                   draggable={false}
                   decoding="async"
                 />
-                <strong>{carousel.named(item.title)}</strong>
+                <strong>
+                  {`${carousel.named(item.title)} | ${item.id === "mokotow" ? carousel.realizacja : carousel.wizualizacja}`}
+                </strong>
               </button>
             );
           })}
