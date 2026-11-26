@@ -499,8 +499,25 @@ h2, .project-title {
 .contact-social {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 22px;
-  margin: 0;
+  gap: 4px 8px;
+  margin: 8px 0 0;
+}
+
+.contact-social a {
+  justify-content: center;
+  min-width: 44px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.contact-social a:hover {
+  color: var(--muted);
+}
+
+.contact-social svg {
+  display: block;
+  width: 22px;
+  height: 22px;
 }
 
 .foot-social {
