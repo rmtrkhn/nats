@@ -11,6 +11,7 @@
   --gutter: 40px;
   --page: 1180px;
   --nav-h: 56px;
+  --logo-h: 24px;
 }
 
 * { box-sizing: border-box; }
@@ -26,7 +27,7 @@ body {
   line-height: 1.55;
 }
 
-a { color: inherit; }
+a { color: inherit; text-decoration: none; }
 
 button, input, textarea { font: inherit; color: inherit; }
 
@@ -117,7 +118,7 @@ button, input, textarea { font: inherit; color: inherit; }
 
 .brand img {
   display: block;
-  height: 24px;
+  height: var(--logo-h);
   width: auto;
 }
 
@@ -312,8 +313,7 @@ h2, .project-title {
   aspect-ratio: 1050 / 1140;
 }
 
-.lead,
-.contact-lead {
+.lead {
   margin: 22px 0 0;
   max-width: 38ch;
   color: var(--muted);
@@ -328,7 +328,8 @@ h2, .project-title {
   text-align: center;
 }
 
-.issue-head h2 {
+.issue-head h2,
+.contact h2 {
   font-family: var(--font-display), Georgia, serif;
   font-style: normal;
   font-weight: 500;
@@ -447,29 +448,30 @@ h2, .project-title {
   padding: 72px 0;
 }
 
+.about {
+  text-align: center;
+}
+
+.about h2 {
+  margin-bottom: 16px;
+  font-size: clamp(22px, 2.55vw, 30px);
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
 .about p {
   color: var(--muted);
-  max-width: 46ch;
+  max-width: 62ch;
+  margin: 0 auto;
 }
 
-.facts {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px 24px;
-  margin: 28px 0 0;
-  max-width: 46ch;
+.contact {
+  --contact-gap: calc(22px + 16px * 1.55 + 18px);
+  padding: 80px 0 40px;
 }
-
-.facts dt {
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.facts dd { margin: 4px 0 0; }
-
-.contact { padding: 80px 0 40px; }
 
 .contact-inner {
   display: grid;
@@ -482,21 +484,30 @@ h2, .project-title {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 18px 0 0;
+  margin: var(--contact-gap) 0 0;
 }
 
 .contact-links a,
-.contact-social a,
-.site-foot a,
+.foot-privacy,
 .prose a,
 .consent a,
 .form-status a {
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.5px;
+  text-decoration-color: var(--line-soft);
+  text-underline-offset: 0.42em;
+  text-decoration-skip-ink: none;
 }
 
-.contact-links a,
-.contact-social a {
+.contact-links a:hover,
+.foot-privacy:hover,
+.prose a:hover,
+.consent a:hover,
+.form-status a:hover {
+  text-decoration-color: var(--line);
+}
+
+.contact-links a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
@@ -504,14 +515,17 @@ h2, .project-title {
 
 .contact-social {
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px 8px;
-  margin: 8px 0 0;
+  align-items: center;
+  gap: 4px;
+  margin: calc(var(--contact-gap) - (44px - 22px) / 2) 0 0;
 }
 
 .contact-social a {
-  justify-content: center;
-  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 44px;
+  height: 44px;
   color: var(--ink);
   text-decoration: none;
 }
@@ -526,11 +540,8 @@ h2, .project-title {
   height: 22px;
 }
 
-.foot-social {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 18px;
-  margin: 0;
+.foot-privacy {
+  text-align: right;
 }
 
 form { display: grid; gap: 12px; }
@@ -599,6 +610,7 @@ textarea:focus {
 
 .foot-inner {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 16px;
   padding: 24px 0 48px;
@@ -724,14 +736,13 @@ textarea:focus {
   :root {
     --gutter: 16px;
     --nav-h: 52px;
+    --logo-h: 22px;
   }
 
   h1 { font-size: clamp(32px, 11vw, 44px); }
 
   h2,
   .project-title { font-size: clamp(26px, 8vw, 36px); }
-
-  .brand img { height: 22px; }
 
   .nav-inner {
     gap: 8px;
@@ -810,9 +821,12 @@ textarea:focus {
   .contact { padding: 48px 0 32px; }
 
   .foot-inner {
-    flex-direction: column;
-    gap: 8px;
     padding: 20px 0 36px;
+  }
+
+  .foot-copy,
+  .foot-privacy {
+    white-space: nowrap;
   }
 
   input:not([type="checkbox"]):not([type="hidden"]),

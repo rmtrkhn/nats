@@ -84,22 +84,12 @@ collections:
         file: content/studio-pl.json
         format: json
         fields:
-          - { name: studioKicker, label: Надпись сверху, widget: string }
           - { name: studioTitle, label: Заголовок, widget: string }
           - { name: studioCopy, label: Текст, widget: text }
-          - { name: workLabel, label: "Факт 1 — подпись", widget: string }
-          - { name: workValue, label: "Факт 1 — значение", widget: string }
-          - { name: placeLabel, label: "Факт 2 — подпись", widget: string }
-          - { name: placeValue, label: "Факт 2 — значение", widget: string }
       - name: en
         label: Studio — английский
         file: content/studio-en.json
         format: json
         fields:
-          - { name: studioKicker, label: Надпись сверху, widget: string }
           - { name: studioTitle, label: Заголовок, widget: string }
           - { name: studioCopy, label: Текст, widget: text }
-          - { name: workLabel, label: "Факт 1 — подпись", widget: string }
-          - { name: workValue, label: "Факт 1 — значение", widget: string }
-          - { name: placeLabel, label: "Факт 2 — подпись", widget: string }
-          - { name: placeValue, label: "Факт 2 — значение", widget: string }

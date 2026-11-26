@@ -14,8 +14,7 @@ export const ui = {
     journalSubtitle: "Portfolio",
     issueTitle: "Projekty",
     contactKicker: "Kontakt",
-    contactTitle: "Rozmowa o metrażu.",
-    contactLead: "Krótki opis mieszkania wystarczy.",
+    contactTitle: "Zapraszamy do współpracy",
   },
   journal: {
     title: "Dziennik",

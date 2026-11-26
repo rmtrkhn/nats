@@ -12,7 +12,6 @@ export function ContactSection({ locale }: { locale: Locale }) {
         <div>
           <p className="kicker">{copy.contactKicker}</p>
           <h2>{copy.contactTitle}</h2>
-          <p className="contact-lead">{copy.contactLead}</p>
           <p className="contact-links">
             <a href={`mailto:${studio.email}`}>{studio.email}</a>
             <a href={studio.phoneHref}>{studio.phone}</a>

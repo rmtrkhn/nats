@@ -14,8 +14,7 @@ export const ui = {
     journalSubtitle: "Portfolio",
     issueTitle: "Projects",
     contactKicker: "Contact",
-    contactTitle: "A conversation about your space.",
-    contactLead: "A short description of the apartment is enough.",
+    contactTitle: "Let's work together",
   },
   journal: {
     title: "Journal",

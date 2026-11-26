@@ -26,19 +26,8 @@ export function HomePage({ locale }: { locale: Locale }) {
 
         <section className="band" id="studio">
           <div className="page about">
-            <p className="kicker">{copy.studioKicker}</p>
             <h2>{copy.studioTitle}</h2>
             <p>{copy.studioCopy}</p>
-            <dl className="facts">
-              <div>
-                <dt>{copy.workLabel}</dt>
-                <dd>{copy.workValue}</dd>
-              </div>
-              <div>
-                <dt>{copy.placeLabel}</dt>
-                <dd>{copy.placeValue}</dd>
-              </div>
-            </dl>
           </div>
         </section>
 
