@@ -11,9 +11,9 @@ export const ui = {
     privacy: "Privacy policy",
   },
   home: {
-    journalSubtitle: "Portfolio of works",
+    journalSubtitle: "Portfolio",
     issueKicker: "Projects",
-    issueTitle: ["Ten interiors,", "in full depth"],
+    issueTitle: ["Eight interiors,", "in full depth"],
     contactKicker: "Contact",
     contactTitle: "A conversation about your space.",
     contactLead: "A short description of the apartment is enough.",

@@ -1,8 +1,8 @@
 {
   "projects": [
     {
-      "id": "belki",
-      "title": "Pod belkami",
+      "id": "pod-skosami",
+      "title": "Pod skosami",
       "meta": "Warszawa · wysoki strop",
       "copy": "Belki na skosie, jodła pod nogami. Kuchnia w tym samym beżu. Dwie łazienki: terrazzo i marmur.",
       "layout": "left",
@@ -40,267 +40,52 @@
       ]
     },
     {
-      "id": "wyspa",
-      "title": "Dębowa wyspa",
-      "meta": "Warszawa · salon z kuchnią",
-      "copy": "Zaokrąglona wyspa z witryną na szkło. Stół, obraz i biblioteczka siedzą w jednej boazerii.",
+      "id": "kamila",
+      "title": "Kamila",
+      "meta": "Warszawa · salon przy ogrodzie",
+      "copy": "Bordowa sofa na wprost ogrodu. Wyspa w żółtej płytce, czerwony sufit w przedpokoju, kwiaty w WC.",
       "layout": "right",
       "frames": [
         {
-          "image": "/visuals/projects/02/salon.webp",
-          "label": "Sofa, stół, kuchnia w głębi",
+          "image": "/visuals/projects/10/salon.webp",
+          "label": "Bordowa sofa i ogród",
           "role": "idea"
         },
         {
-          "image": "/visuals/projects/02/jadalnia.webp",
-          "label": "Obraz między kinkietami",
+          "image": "/visuals/projects/10/stol.webp",
+          "label": "Stół pod papierową lampą",
           "role": "light"
         },
         {
-          "image": "/visuals/projects/02/kuchnia.webp",
-          "label": "Wyspa z dębu i mosiądz",
+          "image": "/visuals/projects/10/wyspa.webp",
+          "label": "Żółta wyspa i stół",
           "role": "node"
         },
         {
-          "image": "/visuals/projects/02/biblioteka.webp",
-          "label": "Biblioteczka i fotel",
-          "role": "plan"
-        },
-        {
-          "image": "/visuals/projects/02/telewizor.webp",
-          "label": "Ściana TV, kule światła",
-          "role": "light"
-        },
-        {
-          "image": "/visuals/projects/02/os.webp",
-          "label": "Jedna oś: sofa, stół, wyspa",
-          "role": "plan"
-        },
-        {
-          "image": "/visuals/projects/02/stol.webp",
-          "label": "Stół przy boazerii",
-          "role": "node"
-        },
-        {
-          "image": "/visuals/projects/02/okno.webp",
-          "label": "Sofa na wprost okien",
-          "role": "light"
-        }
-      ]
-    },
-    {
-      "id": "pejzaz",
-      "title": "Pejzaż",
-      "meta": "Warszawa · sypialnia i gabinet",
-      "copy": "Za łóżkiem drzeworytowy pejzaż. Obok gabinet przy oknie: biurko, kanapa i lampa jak skrzydło.",
-      "layout": "left",
-      "frames": [
-        {
-          "image": "/visuals/projects/03/sypialnia.webp",
-          "label": "Wezgłowie na tle pejzażu",
-          "role": "idea"
-        },
-        {
-          "image": "/visuals/projects/03/gabinet.webp",
-          "label": "Biurko, kanapa, okno",
-          "role": "plan"
-        }
-      ]
-    },
-    {
-      "id": "schody",
-      "title": "Szklane schody",
-      "meta": "Warszawa · dwa poziomy",
-      "copy": "Balustrada ze szkła tnie salon. Ciemny dąb w kuchni. W łazience szczelina światła w szafie.",
-      "layout": "right",
-      "frames": [
-        {
-          "image": "/visuals/projects/04/salon.webp",
-          "label": "Stół między schodami a sofą",
-          "role": "idea"
-        },
-        {
-          "image": "/visuals/projects/04/schody.webp",
-          "label": "Szklana balustrada",
-          "role": "plan"
-        },
-        {
-          "image": "/visuals/projects/04/stol.webp",
-          "label": "Stół widziany ze schodów",
-          "role": "node"
-        },
-        {
-          "image": "/visuals/projects/04/sofa.webp",
-          "label": "Sofa i okrągłe kinkiety",
-          "role": "light"
-        },
-        {
-          "image": "/visuals/projects/04/telewizor.webp",
-          "label": "Ściana TV w szczelinie światła",
-          "role": "light"
-        },
-        {
-          "image": "/visuals/projects/04/kuchnia.webp",
-          "label": "Ciemny dąb, kamienny blat",
+          "image": "/visuals/projects/10/plytki.webp",
+          "label": "Wyspa z półką",
           "role": "material"
         },
         {
-          "image": "/visuals/projects/04/wc.webp",
-          "label": "Umywalka i prysznic",
-          "role": "node"
+          "image": "/visuals/projects/10/schody.webp",
+          "label": "Schody i nisza na kawę",
+          "role": "plan"
         },
         {
-          "image": "/visuals/projects/04/lazienka.webp",
-          "label": "Szczelina światła w szafie",
+          "image": "/visuals/projects/10/przedpokoj.webp",
+          "label": "Czerwony sufit, mozaika",
+          "role": "plan"
+        },
+        {
+          "image": "/visuals/projects/10/wc.webp",
+          "label": "Kwiatowa tapeta, konsola",
           "role": "material"
         }
       ]
     },
     {
-      "id": "nisza",
-      "title": "Nisza kawowa",
-      "meta": "Warszawa · kuchnia otwarta",
-      "copy": "Marmur, ciemny fornir, złote uchwyty. Ekspres stoi w niszy, sofa po drugiej stronie blatu.",
-      "layout": "left",
-      "frames": [
-        {
-          "image": "/visuals/projects/05/sofa.webp",
-          "label": "Sofa przy ciągu kuchni",
-          "role": "idea"
-        },
-        {
-          "image": "/visuals/projects/05/blat.webp",
-          "label": "Marmur, bateria, kinkiety",
-          "role": "material"
-        },
-        {
-          "image": "/visuals/projects/05/marmur.webp",
-          "label": "Gruszka i złoty uchwyt",
-          "role": "material"
-        },
-        {
-          "image": "/visuals/projects/05/ekspres.webp",
-          "label": "Ekspres w niszy",
-          "role": "node"
-        },
-        {
-          "image": "/visuals/projects/05/nisza.webp",
-          "label": "Nisza kawowa, szerszy kadr",
-          "role": "node"
-        },
-        {
-          "image": "/visuals/projects/05/stol.webp",
-          "label": "Czarny stół, welurowe krzesło",
-          "role": "plan"
-        },
-        {
-          "image": "/visuals/projects/05/rtv.webp",
-          "label": "Szafka RTV i płyty",
-          "role": "light"
-        }
-      ]
-    },
-    {
-      "id": "luki",
-      "title": "Trzy łuki",
-      "meta": "Warszawa · kuchnia i salon",
-      "copy": "Łuk witryny w kuchni, trzy łuki nad sofą. Kominek w kamieniu zamyka ścianę.",
-      "layout": "right",
-      "frames": [
-        {
-          "image": "/visuals/projects/06/wejscie.webp",
-          "label": "Konsola, łuk, kuchnia",
-          "role": "idea"
-        },
-        {
-          "image": "/visuals/projects/06/wyspa.webp",
-          "label": "Wyspa pod szklanymi kloszami",
-          "role": "node"
-        },
-        {
-          "image": "/visuals/projects/06/okap.webp",
-          "label": "Ryflowany okap, marmurowy blat",
-          "role": "material"
-        },
-        {
-          "image": "/visuals/projects/06/krzesla.webp",
-          "label": "Wyspa otwarta na salon",
-          "role": "plan"
-        },
-        {
-          "image": "/visuals/projects/06/jadalnia.webp",
-          "label": "Stół i witryna w łuku",
-          "role": "light"
-        },
-        {
-          "image": "/visuals/projects/06/luki.webp",
-          "label": "Trzy łuki nad sofą",
-          "role": "plan"
-        },
-        {
-          "image": "/visuals/projects/06/sofa.webp",
-          "label": "Sofa, łuki, światło w niszach",
-          "role": "light"
-        },
-        {
-          "image": "/visuals/projects/06/kominek.webp",
-          "label": "Kominek w kamieniu",
-          "role": "material"
-        }
-      ]
-    },
-    {
-      "id": "kobalt",
-      "title": "Kobalt",
-      "meta": "Warszawa · mieszkanie",
-      "copy": "Korytarz w graficie i rysunku drewna, kuchnia w kobalcie. Łuk drzwi otwiera gabinet.",
-      "layout": "left",
-      "frames": [
-        {
-          "image": "/visuals/projects/07/korytarz.webp",
-          "label": "Fornir jak mapa, czarna komoda",
-          "role": "idea"
-        },
-        {
-          "image": "/visuals/projects/07/os.webp",
-          "label": "Oś na kobaltową kuchnię",
-          "role": "plan"
-        },
-        {
-          "image": "/visuals/projects/07/salon.webp",
-          "label": "Salon i obraz nad szafką",
-          "role": "light"
-        },
-        {
-          "image": "/visuals/projects/07/kobalt.webp",
-          "label": "Wyspa w kobalcie",
-          "role": "node"
-        },
-        {
-          "image": "/visuals/projects/07/gabinet.webp",
-          "label": "Łuk drzwi do gabinetu",
-          "role": "plan"
-        },
-        {
-          "image": "/visuals/projects/07/toaletka.webp",
-          "label": "Toaletka przy łóżku",
-          "role": "node"
-        },
-        {
-          "image": "/visuals/projects/07/sypialnia.webp",
-          "label": "Łóżko, kobaltowa zasłona",
-          "role": "light"
-        },
-        {
-          "image": "/visuals/projects/07/lazienka.webp",
-          "label": "Szachownica i ciemna płytka",
-          "role": "material"
-        }
-      ]
-    },
-    {
-      "id": "lampiony",
-      "title": "Lampiony",
+      "id": "marta",
+      "title": "Marta",
       "meta": "Warszawa · dom",
       "copy": "Papierowe klosze nad sofą, zielony marmur w kuchni. Bordowy sufit w przedpokoju, prysznic w ciepłym beżu.",
       "layout": "right",
@@ -358,75 +143,242 @@
       ]
     },
     {
-      "id": "okno",
-      "title": "Przy oknie",
-      "meta": "Warszawa · sypialnia",
-      "copy": "Łóżko w lnie, firanka i lampa z trzech krążków. W łazience zielony pas płytki i wanna w marmurze.",
+      "id": "stalowa",
+      "title": "Stalowa",
+      "meta": "Warszawa · mieszkanie",
+      "copy": "Korytarz w graficie i rysunku drewna, kuchnia w kobalcie. Łuk drzwi otwiera gabinet.",
       "layout": "left",
       "frames": [
         {
-          "image": "/visuals/projects/09/sypialnia.webp",
-          "label": "Łóżko, firanka, trzy krążki",
+          "image": "/visuals/projects/07/korytarz.webp",
+          "label": "Fornir jak mapa, czarna komoda",
           "role": "idea"
         },
         {
-          "image": "/visuals/projects/09/toaletka.webp",
-          "label": "Toaletka w świetle okna",
+          "image": "/visuals/projects/07/os.webp",
+          "label": "Oś na kobaltową kuchnię",
+          "role": "plan"
+        },
+        {
+          "image": "/visuals/projects/07/salon.webp",
+          "label": "Salon i obraz nad szafką",
           "role": "light"
         },
         {
-          "image": "/visuals/projects/09/umywalka.webp",
-          "label": "Zielona płytka, marmurowy próg",
-          "role": "material"
+          "image": "/visuals/projects/07/kobalt.webp",
+          "label": "Wyspa w kobalcie",
+          "role": "node"
         },
         {
-          "image": "/visuals/projects/09/wanna.webp",
-          "label": "Wanna, szafka lustrzana",
+          "image": "/visuals/projects/07/gabinet.webp",
+          "label": "Łuk drzwi do gabinetu",
+          "role": "plan"
+        },
+        {
+          "image": "/visuals/projects/07/toaletka.webp",
+          "label": "Toaletka przy łóżku",
           "role": "node"
+        },
+        {
+          "image": "/visuals/projects/07/sypialnia.webp",
+          "label": "Łóżko, kobaltowa zasłona",
+          "role": "light"
+        },
+        {
+          "image": "/visuals/projects/07/lazienka.webp",
+          "label": "Szachownica i ciemna płytka",
+          "role": "material"
         }
       ]
     },
     {
-      "id": "ogrod",
-      "title": "Wino i ogród",
-      "meta": "Warszawa · salon przy ogrodzie",
-      "copy": "Bordowa sofa na wprost ogrodu. Wyspa w żółtej płytce, czerwony sufit w przedpokoju, kwiaty w WC.",
+      "id": "marymont",
+      "title": "Marymont",
+      "meta": "Warszawa · salon z kuchnią",
+      "copy": "Zaokrąglona wyspa z witryną na szkło. Stół, obraz i biblioteczka siedzą w jednej boazerii.",
       "layout": "right",
       "frames": [
         {
-          "image": "/visuals/projects/10/salon.webp",
-          "label": "Bordowa sofa i ogród",
+          "image": "/visuals/projects/02/salon.webp",
+          "label": "Sofa, stół, kuchnia w głębi",
           "role": "idea"
         },
         {
-          "image": "/visuals/projects/10/stol.webp",
-          "label": "Stół pod papierową lampą",
+          "image": "/visuals/projects/02/jadalnia.webp",
+          "label": "Obraz między kinkietami",
           "role": "light"
         },
         {
-          "image": "/visuals/projects/10/wyspa.webp",
-          "label": "Żółta wyspa i stół",
+          "image": "/visuals/projects/02/kuchnia.webp",
+          "label": "Wyspa z dębu i mosiądz",
           "role": "node"
         },
         {
-          "image": "/visuals/projects/10/plytki.webp",
-          "label": "Wyspa z półką",
-          "role": "material"
-        },
-        {
-          "image": "/visuals/projects/10/schody.webp",
-          "label": "Schody i nisza na kawę",
+          "image": "/visuals/projects/02/biblioteka.webp",
+          "label": "Biblioteczka i fotel",
           "role": "plan"
         },
         {
-          "image": "/visuals/projects/10/przedpokoj.webp",
-          "label": "Czerwony sufit, mozaika",
+          "image": "/visuals/projects/02/telewizor.webp",
+          "label": "Ściana TV, kule światła",
+          "role": "light"
+        },
+        {
+          "image": "/visuals/projects/02/os.webp",
+          "label": "Jedna oś: sofa, stół, wyspa",
           "role": "plan"
         },
         {
-          "image": "/visuals/projects/10/wc.webp",
-          "label": "Kwiatowa tapeta, konsola",
+          "image": "/visuals/projects/02/stol.webp",
+          "label": "Stół przy boazerii",
+          "role": "node"
+        },
+        {
+          "image": "/visuals/projects/02/okno.webp",
+          "label": "Sofa na wprost okien",
+          "role": "light"
+        }
+      ]
+    },
+    {
+      "id": "falenty",
+      "title": "Falenty",
+      "meta": "Warszawa · dwa poziomy",
+      "copy": "Balustrada ze szkła tnie salon. Ciemny dąb w kuchni. W łazience szczelina światła w szafie.",
+      "layout": "right",
+      "frames": [
+        {
+          "image": "/visuals/projects/04/salon.webp",
+          "label": "Stół między schodami a sofą",
+          "role": "idea"
+        },
+        {
+          "image": "/visuals/projects/04/schody.webp",
+          "label": "Szklana balustrada",
+          "role": "plan"
+        },
+        {
+          "image": "/visuals/projects/04/stol.webp",
+          "label": "Stół widziany ze schodów",
+          "role": "node"
+        },
+        {
+          "image": "/visuals/projects/04/sofa.webp",
+          "label": "Sofa i okrągłe kinkiety",
+          "role": "light"
+        },
+        {
+          "image": "/visuals/projects/04/telewizor.webp",
+          "label": "Ściana TV w szczelinie światła",
+          "role": "light"
+        },
+        {
+          "image": "/visuals/projects/04/kuchnia.webp",
+          "label": "Ciemny dąb, kamienny blat",
           "role": "material"
+        },
+        {
+          "image": "/visuals/projects/04/wc.webp",
+          "label": "Umywalka i prysznic",
+          "role": "node"
+        },
+        {
+          "image": "/visuals/projects/04/lazienka.webp",
+          "label": "Szczelina światła w szafie",
+          "role": "material"
+        }
+      ]
+    },
+    {
+      "id": "czarnowka",
+      "title": "Czarnówka",
+      "meta": "Warszawa · kuchnia i salon",
+      "copy": "Łuk witryny w kuchni, trzy łuki nad sofą. Kominek w kamieniu zamyka ścianę.",
+      "layout": "right",
+      "frames": [
+        {
+          "image": "/visuals/projects/06/wejscie.webp",
+          "label": "Konsola, łuk, kuchnia",
+          "role": "idea"
+        },
+        {
+          "image": "/visuals/projects/06/wyspa.webp",
+          "label": "Wyspa pod szklanymi kloszami",
+          "role": "node"
+        },
+        {
+          "image": "/visuals/projects/06/okap.webp",
+          "label": "Ryflowany okap, marmurowy blat",
+          "role": "material"
+        },
+        {
+          "image": "/visuals/projects/06/krzesla.webp",
+          "label": "Wyspa otwarta na salon",
+          "role": "plan"
+        },
+        {
+          "image": "/visuals/projects/06/jadalnia.webp",
+          "label": "Stół i witryna w łuku",
+          "role": "light"
+        },
+        {
+          "image": "/visuals/projects/06/luki.webp",
+          "label": "Trzy łuki nad sofą",
+          "role": "plan"
+        },
+        {
+          "image": "/visuals/projects/06/sofa.webp",
+          "label": "Sofa, łuki, światło w niszach",
+          "role": "light"
+        },
+        {
+          "image": "/visuals/projects/06/kominek.webp",
+          "label": "Kominek w kamieniu",
+          "role": "material"
+        }
+      ]
+    },
+    {
+      "id": "mokotow",
+      "title": "Mokotów",
+      "meta": "Warszawa · kuchnia otwarta",
+      "copy": "Marmur, ciemny fornir, złote uchwyty. Ekspres stoi w niszy, sofa po drugiej stronie blatu.",
+      "layout": "left",
+      "frames": [
+        {
+          "image": "/visuals/projects/05/sofa.webp",
+          "label": "Sofa przy ciągu kuchni",
+          "role": "idea"
+        },
+        {
+          "image": "/visuals/projects/05/blat.webp",
+          "label": "Marmur, bateria, kinkiety",
+          "role": "material"
+        },
+        {
+          "image": "/visuals/projects/05/marmur.webp",
+          "label": "Gruszka i złoty uchwyt",
+          "role": "material"
+        },
+        {
+          "image": "/visuals/projects/05/ekspres.webp",
+          "label": "Ekspres w niszy",
+          "role": "node"
+        },
+        {
+          "image": "/visuals/projects/05/nisza.webp",
+          "label": "Nisza kawowa, szerszy kadr",
+          "role": "node"
+        },
+        {
+          "image": "/visuals/projects/05/stol.webp",
+          "label": "Czarny stół, welurowe krzesło",
+          "role": "plan"
+        },
+        {
+          "image": "/visuals/projects/05/rtv.webp",
+          "label": "Szafka RTV i płyty",
+          "role": "light"
         }
       ]
     }

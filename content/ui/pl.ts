@@ -11,9 +11,9 @@ export const ui = {
     privacy: "Polityka prywatności",
   },
   home: {
-    journalSubtitle: "Portfolio prac",
+    journalSubtitle: "Portfolio",
     issueKicker: "Realizacje",
-    issueTitle: ["Dziesięć wnętrz,", "pełna głębokość"],
+    issueTitle: ["Osiem wnętrz,", "pełna głębokość"],
     contactKicker: "Kontakt",
     contactTitle: "Rozmowa o metrażu.",
     contactLead: "Krótki opis mieszkania wystarczy.",
