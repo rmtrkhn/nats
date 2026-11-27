@@ -444,7 +444,7 @@ h2, .project-title {
 .ask { margin-top: 8px; }
 
 .band {
-  background: var(--paper);
+  background: var(--bg);
   padding: 72px 0;
 }
 
@@ -466,6 +466,7 @@ h2, .project-title {
   color: var(--muted);
   max-width: 62ch;
   margin: 0 auto;
+  text-wrap: pretty;
 }
 
 .contact {
@@ -476,15 +477,41 @@ h2, .project-title {
 .contact-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 48px var(--gutter);
+  column-gap: var(--gutter);
+  row-gap: 14px;
   align-items: start;
+}
+
+.contact-intro,
+.contact-form {
+  display: contents;
+}
+
+.contact .kicker {
+  grid-column: 1;
+  grid-row: 1;
+  margin-bottom: 0;
+}
+
+.contact-title { grid-column: 1; grid-row: 2; }
+
+.contact-offer { grid-column: 2; grid-row: 2; }
+
+.contact-meta { grid-column: 1; grid-row: 3; margin-top: 18px; }
+
+.contact-form > form,
+.contact-form > .form-status {
+  grid-column: 2;
+  grid-row: 3;
+  align-self: start;
+  margin-top: 18px;
 }
 
 .contact-links {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: var(--contact-gap) 0 0;
+  margin: 0;
 }
 
 .contact-links a,
@@ -517,7 +544,7 @@ h2, .project-title {
   display: flex;
   align-items: center;
   gap: 4px;
-  margin: calc(var(--contact-gap) - (44px - 22px) / 2) 0 0;
+  margin: 4px 0 0;
 }
 
 .contact-social a {
@@ -565,6 +592,11 @@ textarea {
 textarea {
   resize: vertical;
   min-height: 96px;
+}
+
+textarea::placeholder {
+  color: var(--muted);
+  opacity: 1;
 }
 
 input:focus,
@@ -798,6 +830,20 @@ textarea:focus {
     grid-template-columns: 1fr;
   }
 
+  .contact .kicker,
+  .contact-title,
+  .contact-meta,
+  .contact-offer,
+  .contact-form > form,
+  .contact-form > .form-status { grid-column: 1; }
+
+  .contact .kicker { grid-row: 1; }
+  .contact-title { grid-row: 2; }
+  .contact-meta { grid-row: 3; }
+  .contact-offer { grid-row: 4; }
+  .contact-form > form,
+  .contact-form > .form-status { grid-row: 5; }
+
   .spread.reverse .copy { order: 0; }
 
   .carousel-dots { flex-wrap: wrap; }
@@ -1007,7 +1053,12 @@ textarea:focus {
   position: relative;
   max-width: 100%;
   max-height: 100%;
+  transform-origin: center center;
 }
+
+.journal-viewport.is-zoom { touch-action: none; }
+
+.journal-viewport.is-zoom .journal-zone { pointer-events: none; }
 
 .journal-frame img {
   display: block;
@@ -1202,6 +1253,7 @@ textarea:focus {
   overflow: hidden;
   background: transparent;
   color: var(--ink);
+  touch-action: none;
   padding:
     max(56px, env(safe-area-inset-top))
     max(16px, env(safe-area-inset-right))
@@ -1218,6 +1270,22 @@ textarea:focus {
 .covers-lightbox .icon-btn {
   border-color: var(--ink);
   color: var(--ink);
+}
+
+.covers-lightbox-close {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.covers-lightbox-close svg {
+  width: 18px;
+  height: 18px;
 }
 
 .covers-lightbox :focus-visible { outline-color: var(--ink); }

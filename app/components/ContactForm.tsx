@@ -118,12 +118,15 @@ export function ContactForm({
         />
       </label>
       <label htmlFor="message">
-        {t.message} <span className="req">*</span>
+        <span className="sr-only">
+          {t.message} <span className="req">*</span>
+        </span>
         <textarea
           id="message"
           name="message"
           rows={4}
           required
+          placeholder={`${t.message} *`}
           value={message}
           onChange={(event) => setMessage(event.target.value)}
         />

@@ -9,9 +9,10 @@ export function ContactSection({ locale }: { locale: Locale }) {
   return (
     <section className="contact" id="kontakt">
       <div className="page contact-inner">
-        <div>
+        <div className="contact-intro">
           <p className="kicker">{copy.contactKicker}</p>
-          <h2>{copy.contactTitle}</h2>
+          <h2 className="contact-title">{copy.contactTitle}</h2>
+          <div className="contact-meta">
           <p className="contact-links">
             <a href={`mailto:${studio.email}`}>{studio.email}</a>
             <a href={studio.phoneHref}>{studio.phone}</a>
@@ -34,11 +35,15 @@ export function ContactSection({ locale }: { locale: Locale }) {
               <PinterestIcon />
             </a>
           </p>
+          </div>
         </div>
-        <ContactForm
-          locale={locale}
-          projects={projects.map((item) => ({ id: item.id, title: item.title }))}
-        />
+        <div className="contact-form">
+          <h2 className="contact-offer">{copy.offerTitle}</h2>
+          <ContactForm
+            locale={locale}
+            projects={projects.map((item) => ({ id: item.id, title: item.title }))}
+          />
+        </div>
       </div>
     </section>
   );

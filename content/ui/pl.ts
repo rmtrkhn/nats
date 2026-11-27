@@ -1,8 +1,8 @@
 export const ui = {
   nav: {
-    realizacje: "Realizacje",
+    realizacje: "Projekty",
     dziennik: "Dziennik",
-    studio: "Studio",
+    studio: "O studio",
     kontakt: "Kontakt",
     menu: "Menu",
     close: "Zamknij",
@@ -15,6 +15,7 @@ export const ui = {
     issueTitle: "Projekty",
     contactKicker: "Kontakt",
     contactTitle: "Zapraszamy do współpracy",
+    offerTitle: "Oferta projektu",
   },
   journal: {
     title: "Dziennik",
@@ -35,7 +36,7 @@ export const ui = {
     },
     hint: (title: string) => `${title}. Strzałki zmieniają kadr, kliknięcie powiększa.`,
     covers: "Projekty",
-    named: (title: string) => `Projekt ${title}`,
+    named: (title: string) => `Projekt (${title})`,
     realizacja: "Realizacja",
     wizualizacja: "Wizualizacja",
     open: (title: string) => `Otwórz zdjęcia projektu ${title}`,
@@ -48,10 +49,10 @@ export const ui = {
   },
   form: {
     ok: "Zapytanie przyjęte. Odpowiedź przyjdzie na podany adres.",
-    projectRef: (title: string) => `Wiadomość dotyczy projektu ${title}.`,
+    projectRef: (title: string) => `Wiadomość dotyczy projektu (${title}).`,
     name: "Imię",
     email: "E-mail",
-    message: "O projekcie",
+    message: "m2, lokacja, termin realizacji",
     requiredNote: "Pola oznaczone * są wymagane.",
     consent:
       "Zgadzam się na przetwarzanie imienia, adresu e-mail i treści wiadomości w celu odpowiedzi na zapytanie.",
@@ -61,7 +62,7 @@ export const ui = {
     sending: "Wysyłanie",
     subject: "NATS — zapytanie",
     subjectProject: (title: string) => `NATS — zapytanie: ${title}`,
-    prefilled: (title: string) => `Chcę porozmawiać o projekcie ${title}.`,
+    prefilled: (title: string) => `Chcę porozmawiać o projekcie (${title}).`,
   },
   thanks: {
     kicker: "Kontakt",

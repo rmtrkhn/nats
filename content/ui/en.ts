@@ -2,7 +2,7 @@ export const ui = {
   nav: {
     realizacje: "Projects",
     dziennik: "Journal",
-    studio: "Studio",
+    studio: "About",
     kontakt: "Contact",
     menu: "Menu",
     close: "Close",
@@ -15,6 +15,7 @@ export const ui = {
     issueTitle: "Projects",
     contactKicker: "Contact",
     contactTitle: "Let's work together",
+    offerTitle: "Project offer",
   },
   journal: {
     title: "Journal",
@@ -35,7 +36,7 @@ export const ui = {
     },
     hint: (title: string) => `${title}. Arrow keys change the frame; click to enlarge.`,
     covers: "Projects",
-    named: (title: string) => `Project ${title}`,
+    named: (title: string) => `Project (${title})`,
     realizacja: "Realisation",
     wizualizacja: "Visualisation",
     open: (title: string) => `Open photos of ${title}`,
@@ -48,10 +49,10 @@ export const ui = {
   },
   form: {
     ok: "Message received. We will reply to the address you provided.",
-    projectRef: (title: string) => `This message is about the project ${title}.`,
+    projectRef: (title: string) => `This message is about the project (${title}).`,
     name: "Name",
     email: "Email",
-    message: "About the project",
+    message: "m2, location, completion date",
     requiredNote: "Fields marked * are required.",
     consent:
       "I agree to the processing of my name, email address and message content in order to respond to my inquiry.",
@@ -61,7 +62,7 @@ export const ui = {
     sending: "Sending",
     subject: "NATS — inquiry",
     subjectProject: (title: string) => `NATS — inquiry: ${title}`,
-    prefilled: (title: string) => `I would like to discuss the project ${title}.`,
+    prefilled: (title: string) => `I would like to discuss the project (${title}).`,
   },
   thanks: {
     kicker: "Contact",

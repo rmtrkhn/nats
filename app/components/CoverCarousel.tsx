@@ -11,7 +11,7 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
   const openerRef = useRef<HTMLButtonElement | null>(null);
   const pointerOpen = useRef(false);
   const drag = useRef({ x: 0, y: 0, left: 0, armed: false, moved: false });
-  const swipe = useRef({ x: 0, armed: false });
+  const swipe = useRef({ x: 0, y: 0, armed: false });
   const suppressClick = useRef(false);
   const [openId, setOpenId] = useState<string | null>(null);
   const [photoIndex, setPhotoIndex] = useState(0);
@@ -219,7 +219,9 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
                   decoding="async"
                 />
                 <strong>
-                  {`${carousel.named(item.title)} | ${item.id === "mokotow" ? carousel.realizacja : carousel.wizualizacja}`}
+                  {item.id === "mokotow"
+                    ? `${carousel.named(item.title)} | ${carousel.realizacja}`
+                    : carousel.named(item.title)}
                 </strong>
               </button>
             );
@@ -278,6 +280,30 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
         onClick={(event) => {
           if (event.target === event.currentTarget) event.currentTarget.close();
         }}
+        onPointerDown={(event) => {
+          if (event.button !== 0) return;
+          const target = event.target as HTMLElement;
+          if (target.closest(".covers-lightbox-arrow, .covers-lightbox-close")) return;
+          swipe.current = { x: event.clientX, y: event.clientY, armed: true };
+        }}
+        onPointerUp={(event) => {
+          if (!swipe.current.armed) return;
+          const dx = event.clientX - swipe.current.x;
+          const dy = event.clientY - swipe.current.y;
+          swipe.current.armed = false;
+          const mobile = window.matchMedia("(max-width: 800px)").matches;
+          if (mobile && dy < -64 && Math.abs(dy) > Math.abs(dx)) {
+            suppressClick.current = true;
+            closePreview();
+            return;
+          }
+          if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+          suppressClick.current = true;
+          stepPhoto(dx < 0 ? 1 : -1);
+        }}
+        onPointerCancel={() => {
+          swipe.current.armed = false;
+        }}
         onKeyDown={(event) => {
           if (event.key === "ArrowRight") {
             event.preventDefault();
@@ -292,30 +318,20 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
         {project ? (
           <>
             <div className="lightbox-bar">
-              <button type="button" className="icon-btn" onClick={closePreview}>
-                {carousel.close}
+              <button
+                type="button"
+                className="icon-btn covers-lightbox-close"
+                onClick={closePreview}
+                aria-label={carousel.close}
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 6 L18 18 M18 6 L6 18" fill="none" stroke="currentColor" strokeWidth="1.15" />
+                </svg>
               </button>
             </div>
             <div className="covers-lightbox-body">
               {photo ? (
-                <div
-                  className="covers-lightbox-stage"
-                  onPointerDown={(event) => {
-                    if (event.button !== 0) return;
-                    swipe.current = { x: event.clientX, armed: true };
-                  }}
-                  onPointerUp={(event) => {
-                    if (!swipe.current.armed) return;
-                    const dx = event.clientX - swipe.current.x;
-                    swipe.current.armed = false;
-                    if (Math.abs(dx) < 40) return;
-                    suppressClick.current = true;
-                    stepPhoto(dx < 0 ? 1 : -1);
-                  }}
-                  onPointerCancel={() => {
-                    swipe.current.armed = false;
-                  }}
-                >
+                <div className="covers-lightbox-stage">
                   <img
                     key={photo.original}
                     src={photo.original}

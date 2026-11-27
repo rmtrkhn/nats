@@ -40,8 +40,9 @@ function photo(file: string, label: string, role: FrameRole, width: number, heig
 }
 
 function imagePath(image: string) {
-  if (image.startsWith("/")) return image;
-  return `/visuals/${image.replace(/^visuals\//, "")}`;
+  const normalized = image.normalize("NFC");
+  if (normalized.startsWith("/")) return normalized;
+  return `/visuals/${normalized.replace(/^visuals\//, "")}`;
 }
 
 function roleOf(value: string): FrameRole {

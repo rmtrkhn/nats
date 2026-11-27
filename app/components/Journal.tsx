@@ -27,6 +27,7 @@ export function Journal({
   const trackRef = useRef<HTMLDivElement>(null);
   const goRef = useRef<(delta: number) => void>(() => {});
   const suppressClick = useRef(false);
+  const zoomedRef = useRef(false);
 
   function mod(value: number) {
     return (value + count) % count;
@@ -63,6 +64,7 @@ export function Journal({
       x: 0,
       y: 0,
       origin: 0,
+      originY: 0,
       armed: false,
       moved: false,
       pointerId: -1,
@@ -75,10 +77,53 @@ export function Journal({
       track.style.transform = `translate3d(${-width() + next}px,0,0)`;
     };
 
+    const frameEl = () =>
+      viewport.querySelector<HTMLElement>(".journal-slide:nth-child(2) .journal-frame");
+
+    const zoom = { scale: 1, x: 0, y: 0 };
+    const pointers = new Map<number, { x: number; y: number }>();
+    let pinch: { dist: number; scale: number; x: number; y: number } | null = null;
+
+    const zoomLimits = (scale: number) => {
+      const frame = frameEl();
+      if (!frame || scale <= 1) return { maxX: 0, maxY: 0 };
+      return {
+        maxX: Math.max(0, (frame.offsetWidth * scale - viewport.clientWidth) / 2),
+        maxY: Math.max(0, (frame.offsetHeight * scale - viewport.clientHeight) / 2),
+      };
+    };
+
+    const paintZoom = () => {
+      const frame = frameEl();
+      if (zoom.scale <= 1.01) {
+        zoom.scale = 1;
+        zoom.x = 0;
+        zoom.y = 0;
+      } else {
+        const { maxX, maxY } = zoomLimits(zoom.scale);
+        zoom.x = Math.max(-maxX, Math.min(maxX, zoom.x));
+        zoom.y = Math.max(-maxY, Math.min(maxY, zoom.y));
+      }
+      zoomedRef.current = zoom.scale > 1;
+      if (!frame) return;
+      if (!zoomedRef.current) {
+        frame.style.transform = "";
+        viewport.classList.remove("is-zoom");
+        return;
+      }
+      frame.style.transform = `translate3d(${zoom.x}px, ${zoom.y}px, 0) scale(${zoom.scale})`;
+      viewport.classList.add("is-zoom");
+    };
+
     const settle = (delta: number) => {
       if (!alive) return;
       mode = "rest";
       pos = 0;
+      zoom.scale = 1;
+      zoom.x = 0;
+      zoom.y = 0;
+      pinch = null;
+      paintZoom();
       const next = (indexRef.current + delta + count) % count;
       indexRef.current = next;
       setIndex(next);
@@ -133,7 +178,38 @@ export function Journal({
     };
 
     const onDown = (event: PointerEvent) => {
-      if (event.button !== 0 || mode === "glide") return;
+      if (event.button !== 0) return;
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      if (pointers.size >= 2) {
+        if (mode === "glide") {
+          mode = "rest";
+          cancelAnimationFrame(raf);
+          raf = 0;
+        }
+        drag.armed = false;
+        drag.moved = false;
+        viewport.classList.remove("is-drag");
+        paint(0);
+        const pts = [...pointers.values()];
+        pinch = {
+          dist: Math.max(1, Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y)),
+          scale: zoom.scale,
+          x: zoom.x,
+          y: zoom.y,
+        };
+        return;
+      }
+      if (mode === "glide" || zoom.scale > 1) {
+        if (mode === "glide") return;
+        drag.armed = true;
+        drag.moved = false;
+        drag.x = event.clientX;
+        drag.y = event.clientY;
+        drag.origin = zoom.x;
+        drag.originY = zoom.y;
+        drag.pointerId = event.pointerId;
+        return;
+      }
       drag.armed = true;
       drag.moved = false;
       drag.x = event.clientX;
@@ -146,7 +222,30 @@ export function Journal({
     };
 
     const onMove = (event: PointerEvent) => {
-      if (!drag.armed || event.pointerId !== drag.pointerId) return;
+      if (!pointers.has(event.pointerId)) return;
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      if (pointers.size >= 2 && pinch) {
+        const pts = [...pointers.values()];
+        const dist = Math.max(1, Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y));
+        const next = Math.min(4, Math.max(1, pinch.scale * (dist / pinch.dist)));
+        const ratio = pinch.scale > 0 ? next / pinch.scale : 1;
+        zoom.scale = next;
+        zoom.x = pinch.x * ratio;
+        zoom.y = pinch.y * ratio;
+        paintZoom();
+        return;
+      }
+      if (zoom.scale > 1 && drag.armed && event.pointerId === drag.pointerId) {
+        const dx = event.clientX - drag.x;
+        const dy = event.clientY - drag.y;
+        if (!drag.moved && Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+        drag.moved = true;
+        zoom.x = drag.origin + dx;
+        zoom.y = drag.originY + dy;
+        paintZoom();
+        return;
+      }
+      if (!drag.armed || event.pointerId !== drag.pointerId || zoom.scale > 1) return;
       const dx = event.clientX - drag.x;
       const dy = event.clientY - drag.y;
       if (!drag.moved) {
@@ -173,6 +272,21 @@ export function Journal({
     };
 
     const endDrag = (event: PointerEvent) => {
+      pointers.delete(event.pointerId);
+      if (pointers.size < 2) pinch = null;
+      if (zoom.scale > 1) {
+        const moved = drag.moved;
+        drag.armed = false;
+        drag.moved = false;
+        if (drag.pointerId === event.pointerId) drag.pointerId = -1;
+        if (moved) {
+          suppressClick.current = true;
+          window.setTimeout(() => {
+            suppressClick.current = false;
+          }, 0);
+        }
+        return;
+      }
       if (event.pointerId !== drag.pointerId) return;
       const moved = drag.moved;
       drag.armed = false;
@@ -210,6 +324,11 @@ export function Journal({
       drag.armed = false;
       viewport.classList.remove("is-drag");
       paint(0);
+      paintZoom();
+    };
+
+    const onTouchMove = (event: TouchEvent) => {
+      if (event.touches.length >= 2 || zoom.scale > 1) event.preventDefault();
     };
 
     paint(0);
@@ -217,6 +336,7 @@ export function Journal({
     viewport.addEventListener("pointermove", onMove);
     viewport.addEventListener("pointerup", endDrag);
     viewport.addEventListener("pointercancel", endDrag);
+    viewport.addEventListener("touchmove", onTouchMove, { passive: false });
     window.addEventListener("resize", onResize);
 
     return () => {
@@ -227,6 +347,7 @@ export function Journal({
       viewport.removeEventListener("pointermove", onMove);
       viewport.removeEventListener("pointerup", endDrag);
       viewport.removeEventListener("pointercancel", endDrag);
+      viewport.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("resize", onResize);
     };
   }, [count]);
@@ -236,6 +357,7 @@ export function Journal({
   }
 
   function onZone(delta: number) {
+    if (zoomedRef.current) return;
     if (suppressClick.current) {
       suppressClick.current = false;
       return;
