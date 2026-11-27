@@ -444,7 +444,7 @@ h2, .project-title {
 .ask { margin-top: 8px; }
 
 .band {
-  background: var(--bg);
+  background: #f1f1f1;
   padding: 72px 0;
 }
 
