@@ -1,5 +1,5 @@
 export const studio = {
-  email: "hello@nats-architects.com",
+  email: "nats.architekts@gmail.com",
   phone: "+48 884 330 557",
   phoneHref: "tel:+48884330557",
   instagram: "https://www.instagram.com/nats.architects/",
