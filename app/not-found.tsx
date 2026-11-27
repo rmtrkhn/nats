@@ -5,7 +5,7 @@ import { localeHref } from "../lib/i18n";
 export default function NotFound() {
   return (
     <>
-      <SiteHeader locale="pl" route="home" />
+      <SiteHeader locale="pl" />
       <main className="page prose">
         <p className="kicker">404</p>
         <h1>Nie ma takiej strony.</h1>

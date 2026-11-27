@@ -94,7 +94,12 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
     const track = trackRef.current;
     if (!stage || !track) return;
     const width = stage.clientWidth;
-    if (!width) return;
+    // An unloaded frame reports 0. Leave the CSS -100% offset so the middle
+    // slide stays visible instead of flashing the previous photo.
+    if (!width) {
+      track.style.transform = "";
+      return;
+    }
     track.style.transform = `translate3d(${-width}px,0,0)`;
   }, [photoIndex, openId]);
 
@@ -130,7 +135,12 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
 
     const paint = (next: number) => {
       pos = next;
-      track.style.transform = `translate3d(${-width() + next}px,0,0)`;
+      const w = width();
+      if (!w) {
+        track.style.transform = "";
+        return;
+      }
+      track.style.transform = `translate3d(${-w + next}px,0,0)`;
     };
 
     const settle = (delta: number) => {
@@ -261,7 +271,7 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
       glide(dest, Math.abs(coast) > 12);
     };
 
-    const onResize = () => {
+    const realign = () => {
       if (mode === "glide") {
         mode = "rest";
         cancelAnimationFrame(raf);
@@ -272,22 +282,32 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
       paint(0);
     };
 
+    let seenWidth = width();
+    const observer = new ResizeObserver(() => {
+      const next = width();
+      if (next === seenWidth) return;
+      seenWidth = next;
+      realign();
+    });
+
     paint(0);
+    observer.observe(stage);
     stage.addEventListener("pointerdown", onDown);
     stage.addEventListener("pointermove", onMove);
     stage.addEventListener("pointerup", endDrag);
     stage.addEventListener("pointercancel", endDrag);
-    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", realign);
 
     return () => {
       alive = false;
       goRef.current = () => {};
       cancelAnimationFrame(raf);
+      observer.disconnect();
       stage.removeEventListener("pointerdown", onDown);
       stage.removeEventListener("pointermove", onMove);
       stage.removeEventListener("pointerup", endDrag);
       stage.removeEventListener("pointercancel", endDrag);
-      window.removeEventListener("resize", onResize);
+      window.removeEventListener("resize", realign);
     };
   }, [openId, photos.length]);
 
@@ -568,6 +588,7 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
                     <button
                       type="button"
                       className="covers-lightbox-zone covers-lightbox-zone-prev"
+                      tabIndex={-1}
                       aria-label={carousel.back}
                       onClick={() => {
                         if (suppressClick.current) {
@@ -580,6 +601,7 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
                     <button
                       type="button"
                       className="covers-lightbox-zone covers-lightbox-zone-next"
+                      tabIndex={-1}
                       aria-label={carousel.forward}
                       onClick={() => {
                         if (suppressClick.current) {

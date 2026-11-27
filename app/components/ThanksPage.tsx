@@ -7,7 +7,7 @@ export function ThanksPage({ locale }: { locale: Locale }) {
 
   return (
     <>
-      <SiteHeader locale={locale} route="dziekujemy" />
+      <SiteHeader locale={locale} />
       <main className="page prose">
         <p className="kicker">{copy.kicker}</p>
         <h1>{copy.title}</h1>

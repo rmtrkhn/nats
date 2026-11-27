@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function DziennikPage() {
   return (
     <>
-      <SiteHeader locale="pl" route="dziennik" />
+      <SiteHeader locale="pl" />
       <main id="top">
         <Journal locale="pl" />
         <ContactSection locale="pl" />

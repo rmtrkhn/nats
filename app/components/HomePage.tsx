@@ -11,7 +11,7 @@ export function HomePage({ locale }: { locale: Locale }) {
 
   return (
     <>
-      <SiteHeader locale={locale} route="home" />
+      <SiteHeader locale={locale} />
       <main id="top">
         <Journal locale={locale} subtitle={copy.journalSubtitle} />
 

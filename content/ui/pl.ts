@@ -36,7 +36,7 @@ export const ui = {
     },
     hint: (title: string) => `${title}. Strzałki zmieniają kadr, kliknięcie powiększa.`,
     covers: "Projekty",
-    named: (title: string) => `Projekt (${title})`,
+    named: (title: string) => `Projekt „${title}”`,
     realizacja: "Realizacja",
     wizualizacja: "Wizualizacja",
     open: (title: string) => `Otwórz zdjęcia projektu ${title}`,
@@ -49,7 +49,7 @@ export const ui = {
   },
   form: {
     ok: "Zapytanie przyjęte. Odpowiedź przyjdzie na podany adres.",
-    projectRef: (title: string) => `Wiadomość dotyczy projektu (${title}).`,
+    projectRef: (title: string) => `Wiadomość dotyczy projektu „${title}”.`,
     name: "Imię",
     email: "E-mail",
     message: "Opis projektu",
@@ -62,7 +62,7 @@ export const ui = {
     sending: "Wysyłanie",
     subject: "NATS — zapytanie",
     subjectProject: (title: string) => `NATS — zapytanie: ${title}`,
-    prefilled: (title: string) => `Chcę porozmawiać o projekcie (${title}).`,
+    prefilled: (title: string) => `Chcę porozmawiać o projekcie „${title}”.`,
   },
   thanks: {
     kicker: "Kontakt",

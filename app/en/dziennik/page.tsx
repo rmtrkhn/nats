@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function EnJournalPage() {
   return (
     <>
-      <SiteHeader locale="en" route="dziennik" />
+      <SiteHeader locale="en" />
       <main id="top">
         <Journal locale="en" />
         <ContactSection locale="en" />

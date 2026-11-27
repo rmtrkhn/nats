@@ -210,6 +210,13 @@
       "layout": "right",
       "frames": [
         {
+          "image": "/visuals/projects/marta/02_Salon_07.webp",
+          "label": "02 Salon 07",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
+        },
+        {
           "image": "/visuals/projects/marta/02_Salon_03.webp",
           "label": "02 Salon 03",
           "role": "idea",
@@ -219,13 +226,6 @@
         {
           "image": "/visuals/projects/marta/02_Salon_04.webp",
           "label": "02 Salon 04",
-          "role": "idea",
-          "width": 1200,
-          "height": 1500
-        },
-        {
-          "image": "/visuals/projects/marta/02_Salon_07.webp",
-          "label": "02 Salon 07",
           "role": "idea",
           "width": 1200,
           "height": 1500
@@ -310,6 +310,13 @@
       "layout": "left",
       "frames": [
         {
+          "image": "/visuals/projects/stalowa/02_Salon_06.webp",
+          "label": "02 Salon 06",
+          "role": "idea",
+          "width": 1200,
+          "height": 1500
+        },
+        {
           "image": "/visuals/projects/stalowa/02_Salon_01.webp",
           "label": "02 Salon 01",
           "role": "idea",
@@ -326,13 +333,6 @@
         {
           "image": "/visuals/projects/stalowa/02_Salon_04.webp",
           "label": "02 Salon 04",
-          "role": "idea",
-          "width": 1200,
-          "height": 1500
-        },
-        {
-          "image": "/visuals/projects/stalowa/02_Salon_06.webp",
-          "label": "02 Salon 06",
           "role": "idea",
           "width": 1200,
           "height": 1500

@@ -8,7 +8,7 @@ export function PrivacyPage({ locale }: { locale: Locale }) {
 
   return (
     <>
-      <SiteHeader locale={locale} route="polityka" />
+      <SiteHeader locale={locale} />
       <main className="page prose">
         <p className="kicker">{copy.kicker}</p>
         <h1>{copy.title}</h1>
