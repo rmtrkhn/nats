@@ -83,7 +83,19 @@ export function Journal({
 
     const zoom = { scale: 1, x: 0, y: 0 };
     const pointers = new Map<number, { x: number; y: number }>();
-    let pinch: { dist: number; scale: number; x: number; y: number } | null = null;
+    let pinch: { dist: number; scale: number; x: number; y: number; side: -1 | 0 | 1 } | null = null;
+
+    // Landscape spreads are a left page and a right page. On a phone, a pinch
+    // on one of them should enlarge that half, not the middle of the spread.
+    const spreadSide = (clientX: number): -1 | 0 | 1 => {
+      if (!window.matchMedia("(max-width: 800px)").matches) return 0;
+      const frame = frameEl();
+      const img = frame?.querySelector("img");
+      if (!frame || !img || img.naturalWidth <= img.naturalHeight) return 0;
+      const rect = frame.getBoundingClientRect();
+      if (rect.width < 1) return 0;
+      return clientX < rect.left + rect.width / 2 ? 1 : -1;
+    };
 
     const zoomLimits = (scale: number) => {
       const frame = frameEl();
@@ -193,11 +205,13 @@ export function Journal({
         paint(0);
         if (finePointer) return;
         const pts = [...pointers.values()];
+        const midX = (pts[0].x + pts[1].x) / 2;
         pinch = {
           dist: Math.max(1, Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y)),
           scale: zoom.scale,
           x: zoom.x,
           y: zoom.y,
+          side: spreadSide(midX),
         };
         return;
       }
@@ -231,10 +245,22 @@ export function Journal({
         const pts = [...pointers.values()];
         const dist = Math.max(1, Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y));
         const next = Math.min(4, Math.max(1, pinch.scale * (dist / pinch.dist)));
-        const ratio = pinch.scale > 0 ? next / pinch.scale : 1;
-        zoom.scale = next;
-        zoom.x = pinch.x * ratio;
-        zoom.y = pinch.y * ratio;
+        const frame = frameEl();
+        if (pinch.side !== 0 && frame) {
+          zoom.scale = next;
+          zoom.x = pinch.side * (frame.offsetWidth / 4) * next;
+          zoom.y = 0;
+        } else if (frame && zoom.scale > 0) {
+          const rect = frame.getBoundingClientRect();
+          const midX = (pts[0].x + pts[1].x) / 2;
+          const midY = (pts[0].y + pts[1].y) / 2;
+          const factor = 1 - next / zoom.scale;
+          zoom.x += (midX - (rect.left + rect.width / 2)) * factor;
+          zoom.y += (midY - (rect.top + rect.height / 2)) * factor;
+          zoom.scale = next;
+        } else {
+          zoom.scale = next;
+        }
         paintZoom();
         return;
       }
