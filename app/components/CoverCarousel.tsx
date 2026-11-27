@@ -4,6 +4,9 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { projects } from "../../content/projects";
 import { type Locale, getUi } from "../../lib/i18n";
 
+const easeOut = (t: number) => 1 - (1 - t) ** 3;
+const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
+
 export function CoverCarousel({ locale }: { locale: Locale }) {
   const carousel = getUi(locale).carousel;
   const railRef = useRef<HTMLDivElement>(null);
@@ -13,6 +16,10 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
   const drag = useRef({ x: 0, y: 0, left: 0, armed: false, moved: false });
   const swipe = useRef({ x: 0, y: 0, armed: false });
   const suppressClick = useRef(false);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const goRef = useRef<(delta: number) => void>(() => {});
+  const photoIndexRef = useRef(0);
   const [openId, setOpenId] = useState<string | null>(null);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [page, setPage] = useState(0);
@@ -20,6 +27,13 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
   const project = projects.find((item) => item.id === openId) ?? null;
   const photos = project ? project.frames : [];
   const photo = photos[photoIndex] ?? null;
+  photoIndexRef.current = photoIndex;
+
+  function mod(value: number) {
+    const count = photos.length;
+    if (!count) return 0;
+    return (value + count) % count;
+  }
 
   useEffect(() => {
     const rail = railRef.current;
@@ -76,6 +90,208 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
   }, []);
 
   useLayoutEffect(() => {
+    const stage = stageRef.current;
+    const track = trackRef.current;
+    if (!stage || !track) return;
+    const width = stage.clientWidth;
+    if (!width) return;
+    track.style.transform = `translate3d(${-width}px,0,0)`;
+  }, [photoIndex, openId]);
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    const track = trackRef.current;
+    if (!stage || !track || photos.length < 2) return;
+
+    const count = photos.length;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let alive = true;
+    let raf = 0;
+    let pos = 0;
+    let mode: "rest" | "glide" = "rest";
+    let glideFrom = 0;
+    let glideTo = 0;
+    let glideStart = 0;
+    let glideMs = 0;
+    let glideEase = easeInOut;
+    let sampleX = 0;
+    let sampleT = 0;
+    let velocity = 0;
+    const drag = {
+      x: 0,
+      y: 0,
+      origin: 0,
+      armed: false,
+      moved: false,
+      pointerId: -1,
+    };
+
+    const width = () => stage.clientWidth;
+
+    const paint = (next: number) => {
+      pos = next;
+      track.style.transform = `translate3d(${-width() + next}px,0,0)`;
+    };
+
+    const settle = (delta: number) => {
+      if (!alive) return;
+      mode = "rest";
+      pos = 0;
+      const next = (photoIndexRef.current + delta + count) % count;
+      photoIndexRef.current = next;
+      setPhotoIndex(next);
+    };
+
+    const tick = (now: number) => {
+      raf = 0;
+      if (mode !== "glide") return;
+      const t = Math.min(1, (now - glideStart) / glideMs);
+      paint(glideFrom + (glideTo - glideFrom) * glideEase(t));
+      if (t < 1) {
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+      paint(glideTo);
+      mode = "rest";
+      const w = width();
+      if (w && glideTo <= -w + 0.5) settle(1);
+      else if (w && glideTo >= w - 0.5) settle(-1);
+    };
+
+    const kick = () => {
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+
+    const glide = (dest: number, flung: boolean) => {
+      const w = width();
+      if (!w) return;
+      if (reduce || Math.abs(dest - pos) < 0.5) {
+        if (dest <= -w + 0.5) settle(1);
+        else if (dest >= w - 0.5) settle(-1);
+        else paint(0);
+        return;
+      }
+      glideFrom = pos;
+      glideTo = dest;
+      glideStart = performance.now();
+      glideMs = Math.min(520, Math.max(240, Math.abs(dest - pos) * 0.55));
+      glideEase = flung ? easeOut : easeInOut;
+      mode = "glide";
+      kick();
+    };
+
+    goRef.current = (delta: number) => {
+      if (!alive || mode === "glide") return;
+      const w = width();
+      if (!w || reduce) {
+        settle(delta);
+        return;
+      }
+      glide(delta > 0 ? -w : w, true);
+    };
+
+    const onDown = (event: PointerEvent) => {
+      if (event.button !== 0 || mode === "glide") return;
+      const target = event.target as HTMLElement;
+      if (target.closest(".covers-lightbox-arrow, .covers-lightbox-close")) return;
+      drag.armed = true;
+      drag.moved = false;
+      drag.x = event.clientX;
+      drag.y = event.clientY;
+      drag.origin = pos;
+      drag.pointerId = event.pointerId;
+      sampleX = event.clientX;
+      sampleT = performance.now();
+      velocity = 0;
+    };
+
+    const onMove = (event: PointerEvent) => {
+      if (!drag.armed || event.pointerId !== drag.pointerId) return;
+      const dx = event.clientX - drag.x;
+      const dy = event.clientY - drag.y;
+      if (!drag.moved) {
+        if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+        if (Math.abs(dy) > Math.abs(dx)) {
+          drag.armed = false;
+          return;
+        }
+        drag.moved = true;
+        stage.classList.add("is-drag");
+        try {
+          stage.setPointerCapture(event.pointerId);
+        } catch {
+          // A pointer id is only capturable while that pointer is really down.
+        }
+      }
+      const now = performance.now();
+      const elapsed = now - sampleT;
+      if (elapsed > 0) velocity = velocity * 0.65 + ((event.clientX - sampleX) / elapsed) * 0.35;
+      sampleX = event.clientX;
+      sampleT = now;
+      const w = width();
+      paint(Math.max(-w, Math.min(w, drag.origin + dx)));
+    };
+
+    const endDrag = (event: PointerEvent) => {
+      if (event.pointerId !== drag.pointerId) return;
+      const moved = drag.moved;
+      drag.armed = false;
+      drag.moved = false;
+      drag.pointerId = -1;
+      stage.classList.remove("is-drag");
+      if (stage.hasPointerCapture(event.pointerId)) {
+        try {
+          stage.releasePointerCapture(event.pointerId);
+        } catch {
+          // Already released.
+        }
+      }
+      if (!moved) return;
+      suppressClick.current = true;
+      window.setTimeout(() => {
+        suppressClick.current = false;
+      }, 0);
+      const w = width();
+      const idle = performance.now() - sampleT;
+      const coast = idle > 90 ? 0 : Math.max(-w * 0.85, Math.min(w * 0.85, velocity * 280));
+      const projected = Math.max(-w, Math.min(w, pos + coast));
+      let dest = 0;
+      if (projected <= -w * 0.5) dest = -w;
+      else if (projected >= w * 0.5) dest = w;
+      glide(dest, Math.abs(coast) > 12);
+    };
+
+    const onResize = () => {
+      if (mode === "glide") {
+        mode = "rest";
+        cancelAnimationFrame(raf);
+        raf = 0;
+      }
+      drag.armed = false;
+      stage.classList.remove("is-drag");
+      paint(0);
+    };
+
+    paint(0);
+    stage.addEventListener("pointerdown", onDown);
+    stage.addEventListener("pointermove", onMove);
+    stage.addEventListener("pointerup", endDrag);
+    stage.addEventListener("pointercancel", endDrag);
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      alive = false;
+      goRef.current = () => {};
+      cancelAnimationFrame(raf);
+      stage.removeEventListener("pointerdown", onDown);
+      stage.removeEventListener("pointermove", onMove);
+      stage.removeEventListener("pointerup", endDrag);
+      stage.removeEventListener("pointercancel", endDrag);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [openId, photos.length]);
+
+  useLayoutEffect(() => {
     const node = dialogRef.current;
     if (!node) return;
     if (!project) {
@@ -104,11 +320,8 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
   }
 
   function stepPhoto(delta: number) {
-    setPhotoIndex((current) => {
-      const count = photos.length;
-      if (count < 2) return current;
-      return (current + delta + count) % count;
-    });
+    if (photos.length < 2) return;
+    goRef.current(delta);
   }
 
   function closePreview() {
@@ -295,11 +508,7 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
           if (mobile && dy < -64 && Math.abs(dy) > Math.abs(dx)) {
             suppressClick.current = true;
             closePreview();
-            return;
           }
-          if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
-          suppressClick.current = true;
-          stepPhoto(dx < 0 ? 1 : -1);
         }}
         onPointerCancel={() => {
           swipe.current.armed = false;
@@ -332,36 +541,55 @@ export function CoverCarousel({ locale }: { locale: Locale }) {
             <div className="covers-lightbox-body">
               {photo ? (
                 <div className="covers-lightbox-stage">
-                  <img
-                    key={photo.original}
-                    src={photo.original}
-                    alt={`${project.title} — ${photo.label}`}
-                    draggable={false}
-                  />
-                  <button
-                    type="button"
-                    className="covers-lightbox-zone covers-lightbox-zone-prev"
-                    aria-label={carousel.back}
-                    onClick={() => {
-                      if (suppressClick.current) {
-                        suppressClick.current = false;
-                        return;
-                      }
-                      stepPhoto(-1);
-                    }}
-                  />
-                  <button
-                    type="button"
-                    className="covers-lightbox-zone covers-lightbox-zone-next"
-                    aria-label={carousel.forward}
-                    onClick={() => {
-                      if (suppressClick.current) {
-                        suppressClick.current = false;
-                        return;
-                      }
-                      stepPhoto(1);
-                    }}
-                  />
+                  <div className="covers-lightbox-clip" ref={stageRef}>
+                    <img
+                      className="covers-lightbox-sizer"
+                      src={photo.original}
+                      alt=""
+                      aria-hidden="true"
+                      draggable={false}
+                    />
+                    <div className="covers-lightbox-track" ref={trackRef}>
+                      {[mod(photoIndex - 1), photoIndex, mod(photoIndex + 1)].map((slot, position) => {
+                        const frame = photos[slot];
+                        const current = position === 1;
+                        return (
+                          <div className="covers-lightbox-slide" key={position}>
+                            <img
+                              src={frame.original}
+                              alt={current ? `${project.title} — ${frame.label}` : ""}
+                              aria-hidden={current ? undefined : true}
+                              draggable={false}
+                            />
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <button
+                      type="button"
+                      className="covers-lightbox-zone covers-lightbox-zone-prev"
+                      aria-label={carousel.back}
+                      onClick={() => {
+                        if (suppressClick.current) {
+                          suppressClick.current = false;
+                          return;
+                        }
+                        stepPhoto(-1);
+                      }}
+                    />
+                    <button
+                      type="button"
+                      className="covers-lightbox-zone covers-lightbox-zone-next"
+                      aria-label={carousel.forward}
+                      onClick={() => {
+                        if (suppressClick.current) {
+                          suppressClick.current = false;
+                          return;
+                        }
+                        stepPhoto(1);
+                      }}
+                    />
+                  </div>
                   <button
                     type="button"
                     className="covers-lightbox-arrow covers-lightbox-arrow-prev"
