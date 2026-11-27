@@ -335,23 +335,12 @@ export function Journal({
       if (event.touches.length >= 2 || zoom.scale > 1) event.preventDefault();
     };
 
-    const blockTrackpadZoom = (event: Event) => {
-      if (finePointer) event.preventDefault();
-    };
-
-    const onWheel = (event: WheelEvent) => {
-      if (finePointer && event.ctrlKey) event.preventDefault();
-    };
-
     paint(0);
     viewport.addEventListener("pointerdown", onDown);
     viewport.addEventListener("pointermove", onMove);
     viewport.addEventListener("pointerup", endDrag);
     viewport.addEventListener("pointercancel", endDrag);
     viewport.addEventListener("touchmove", onTouchMove, { passive: false });
-    viewport.addEventListener("wheel", onWheel, { passive: false });
-    viewport.addEventListener("gesturestart", blockTrackpadZoom, { passive: false });
-    viewport.addEventListener("gesturechange", blockTrackpadZoom, { passive: false });
     window.addEventListener("resize", onResize);
 
     return () => {
@@ -363,9 +352,6 @@ export function Journal({
       viewport.removeEventListener("pointerup", endDrag);
       viewport.removeEventListener("pointercancel", endDrag);
       viewport.removeEventListener("touchmove", onTouchMove);
-      viewport.removeEventListener("wheel", onWheel);
-      viewport.removeEventListener("gesturestart", blockTrackpadZoom);
-      viewport.removeEventListener("gesturechange", blockTrackpadZoom);
       window.removeEventListener("resize", onResize);
     };
   }, [count]);
