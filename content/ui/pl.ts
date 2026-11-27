@@ -52,7 +52,7 @@ export const ui = {
     projectRef: (title: string) => `Wiadomość dotyczy projektu (${title}).`,
     name: "Imię",
     email: "E-mail",
-    message: "m2, lokacja, termin realizacji",
+    message: "Opis projektu",
     requiredNote: "Pola oznaczone * są wymagane.",
     consent:
       "Zgadzam się na przetwarzanie imienia, adresu e-mail i treści wiadomości w celu odpowiedzi na zapytanie.",

@@ -52,7 +52,7 @@ export const ui = {
     projectRef: (title: string) => `This message is about the project (${title}).`,
     name: "Name",
     email: "Email",
-    message: "m2, location, completion date",
+    message: "Project description",
     requiredNote: "Fields marked * are required.",
     consent:
       "I agree to the processing of my name, email address and message content in order to respond to my inquiry.",
