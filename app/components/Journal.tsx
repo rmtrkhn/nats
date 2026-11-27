@@ -48,6 +48,7 @@ export function Journal({
     if (!viewport || !track) return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     let alive = true;
     let raf = 0;
     let pos = 0;
@@ -190,6 +191,7 @@ export function Journal({
         drag.moved = false;
         viewport.classList.remove("is-drag");
         paint(0);
+        if (finePointer) return;
         const pts = [...pointers.values()];
         pinch = {
           dist: Math.max(1, Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y)),
@@ -224,6 +226,7 @@ export function Journal({
     const onMove = (event: PointerEvent) => {
       if (!pointers.has(event.pointerId)) return;
       pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      if (finePointer && pointers.size >= 2) return;
       if (pointers.size >= 2 && pinch) {
         const pts = [...pointers.values()];
         const dist = Math.max(1, Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y));
@@ -328,7 +331,16 @@ export function Journal({
     };
 
     const onTouchMove = (event: TouchEvent) => {
+      if (finePointer) return;
       if (event.touches.length >= 2 || zoom.scale > 1) event.preventDefault();
+    };
+
+    const blockTrackpadZoom = (event: Event) => {
+      if (finePointer) event.preventDefault();
+    };
+
+    const onWheel = (event: WheelEvent) => {
+      if (finePointer && event.ctrlKey) event.preventDefault();
     };
 
     paint(0);
@@ -337,6 +349,9 @@ export function Journal({
     viewport.addEventListener("pointerup", endDrag);
     viewport.addEventListener("pointercancel", endDrag);
     viewport.addEventListener("touchmove", onTouchMove, { passive: false });
+    viewport.addEventListener("wheel", onWheel, { passive: false });
+    viewport.addEventListener("gesturestart", blockTrackpadZoom, { passive: false });
+    viewport.addEventListener("gesturechange", blockTrackpadZoom, { passive: false });
     window.addEventListener("resize", onResize);
 
     return () => {
@@ -348,6 +363,9 @@ export function Journal({
       viewport.removeEventListener("pointerup", endDrag);
       viewport.removeEventListener("pointercancel", endDrag);
       viewport.removeEventListener("touchmove", onTouchMove);
+      viewport.removeEventListener("wheel", onWheel);
+      viewport.removeEventListener("gesturestart", blockTrackpadZoom);
+      viewport.removeEventListener("gesturechange", blockTrackpadZoom);
       window.removeEventListener("resize", onResize);
     };
   }, [count]);
